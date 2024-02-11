@@ -1,0 +1,36 @@
+
+
+
+{% extends "base_auth.html.twig" %}
+{% block body %} 
+
+
+<h2>Formulaire d'inscription</h2>
+{% if msg %}
+<div>{{msg}} </div>
+{% endif %}
+    <form action="" method="post" >
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" name="email" id="email" placeholder="entrez votre email"required><br><br>
+        </div>
+   
+        <div>
+            <label for="password">confirmer Mot de passe :</label>
+            <input type="password" name="password" id="password" placeholder="confirmer votre password" required><br><br>
+        </div>
+        
+        
+        
+        <input type="submit" name="send" value="connect">
+    </form>
+    
+    <a href="pass_forgot.php">mot de passe oublié </a>
+    <p>
+        <a href="register.php">pas encore de compte ? </a>
+    </p>
+</body>
+</html>
+
+ {% endblock %}
+

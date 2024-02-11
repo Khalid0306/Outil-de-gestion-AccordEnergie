@@ -1,0 +1,46 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %} 
+<h1>creer votre comte</h1>
+
+    <form action="" method="post">
+     <div>
+        <label for="email">Email :</label>
+        <input type="email" name="email" id="email" placeholder="entrez votre email"required><br><br>
+      </div>
+        
+
+        <div>
+<label for="email_cfg">Email :</label>
+        <input type="email" name="email_cfg" id="email_cfg" placeholder="confirmer  votre email"required><br><br>
+        </div>
+
+
+        
+         <div>
+        <label for="password">Mot de passe :</label>
+        <input type="password" name="password" id="password" placeholder="entrez votre password"  required><br><br>
+  </div>
+        
+
+
+        
+        
+         <div>
+        <label for="password_cfg">confirmer Mot de passe :</label>
+        <input type="password" name="password_cfh" id="password"   placeholder="confirmer  votre password" required><br><br>
+          </div>
+        
+        
+        <input type="submit" name="send" value="S'inscrire">
+    </form>
+    <p>
+<a href="index.php">pas encore de compte ?</a>
+</p>
+</body>
+</html>
+
+
+
+
+ {% endblock %}
