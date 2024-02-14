@@ -13,9 +13,14 @@ if (isset($_POST['sendResquest'])){
         'email' => $_POST['email'],
     ]);
 
+
+    
+
     if ($userData) {
         $page->Session->add('user',$userData);
-        header('Location: Confirmation.php');
+       header('Location: Confirmation.php');
+
+         
         exit();
     }
 

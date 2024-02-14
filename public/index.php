@@ -13,6 +13,7 @@ if (isset($_POST['send'])) {
     $user = $page->getUserByEmail([
         'email' => $_POST['email'],
     ]);
+    
 
     // var_dump($user);
       
@@ -30,7 +31,6 @@ if (isset($_POST['send'])) {
 
     header('Location: profile.php');
 }
-
 
 
 

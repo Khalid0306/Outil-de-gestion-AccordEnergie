@@ -15,9 +15,20 @@ if (isset($_SESSION['user'])) {
     // Vérifier si l'utilisateur existe
     if ($userData) {
         echo $page->render('profil.html.twig', ['msg' => $msg, 'userData' => $userData]);
+
+
         exit();
+
+
+        
+    
     }
+
+
+
+
 }
+
 
 
 echo $page->render('profil.html.twig', [ 'user' => $userData]);

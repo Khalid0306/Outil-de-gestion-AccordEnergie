@@ -1,36 +1,40 @@
-
-
-
 {% extends "base_auth.html.twig" %}
 {% block body %} 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    </style>
+</head>
+<body>
 
-<h2>Formulaire d'inscription</h2>
+<h2>Formulaire de connexion</h2>
 {% if msg %}
 <div>{{msg}} </div>
 {% endif %}
-    <form action="" method="post" >
-        <div>
-            <label for="email">Email :</label>
-            <input type="email" name="email" id="email" placeholder="entrez votre email"required><br><br>
-        </div>
-   
-        <div>
-            <label for="password">confirmer Mot de passe :</label>
-            <input type="password" name="password" id="password" placeholder="confirmer votre password" required><br><br>
-        </div>
-        
-        
-        
-        <input type="submit" name="send" value="connect">
-    </form>
+<form action="" method="post">
+    <div>
+        <label for="email">Email :</label>
+        <input type="email" name="email" id="email" placeholder="entrez votre email" required><br><br>
+    </div>
+
+    <div>
+        <label for="password">confirmer Mot de passe :</label>
+        <input type="password" name="password" id="password" placeholder="confirmer votre password" required><br><br>
+    </div>
+
+    <input type="submit" name="send" value="connect">
     
-    <a href="pass_forgot.php">mot de passe oublié </a>
-    <p>
-        <a href="register.php">pas encore de compte ? </a>
-    </p>
+</form>
+
+<a href="pass_forgot.php">mot de passe oublié </a>
+<p>
+    <a href="register.php">pas encore de compte ? </a>
+</p>
 </body>
 </html>
 
- {% endblock %}
-
+{% endblock %}
