@@ -7,13 +7,7 @@ $page = new Page();
 if (!isset($_SESSION['user'])){
     header('Location: index.php');
 }
-if ($userData) {
-    echo $page->render('profil.html.twig', ['msg' => $msg, 'userData' => $userData]);
-    exit();    
-}
-if ($conn->connect_error) {
-    die("Erreur de connexion à la base de données : " . $conn->connect_error);
-}
+
 
 // Fonction pour obtenir la liste des interventions avec leur suivi
 function getSuiviInterventions($conn) {
@@ -29,10 +23,10 @@ function getSuiviInterventions($conn) {
 }
 
 // Exemple d'utilisation de la fonction pour obtenir la liste des interventions avec leur suivi
-$suiviInterventions = getSuiviInterventions($conn);
+//$suiviInterventions = getSuiviInterventions($conn);
 
 // Fermer la connexion à la base de données
-$conn->close();
+//$conn->close();
 
 
 // Afficher la page avec Twig
