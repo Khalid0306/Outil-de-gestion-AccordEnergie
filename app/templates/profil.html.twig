@@ -1,5 +1,6 @@
 {% extends "base_auth.html.twig" %}
 {% block body %}
+<<<<<<< HEAD
     {% include "navbar.html.twig" %}
 
     <!-- Add your stylesheets and scripts here -->
@@ -164,4 +165,25 @@
     <footer>
         {% include "footer.html.twig" %}
     </footer>
+=======
+{% include "navbar.html.twig" %}
+<body>
+    <h1>Bienvenue sur ma page</h1>
+    
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+
+    {% if userData %}
+        <p>Email : {{ userData.AdresseMail  }}</p>
+        <!-- Ajoutez d'autres champs selon votre structure de données en session -->
+    {% endif %}
+    
+<input type="submit" name="sends" value="disconnect">
+<footer>
+{% include "footer.html.twig" %}
+</footer>
+</body>
+</html>
+>>>>>>> 2adb1f506a9da5c7e95d346ae258506068bddb45
 {% endblock %}

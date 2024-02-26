@@ -19,8 +19,11 @@ if (!isset($_SESSION['user'])){
 
 echo $page->render('profil.html.twig', [ 'user' => $userData]);
 
+<<<<<<< HEAD
 if (isset($_POST['sends'])) {
     header('Location: suivi_intervention.php');
     exit(); // Assurez-vous de terminer le script après une redirection
 }
 echo $page->render('suivi_intervention.php', [ 'msg' =>$msg]);
+=======
+>>>>>>> 2adb1f506a9da5c7e95d346ae258506068bddb45
