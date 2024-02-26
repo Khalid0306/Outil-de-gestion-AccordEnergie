@@ -12,7 +12,7 @@ if (isset($_POST['sendReset'])) {
         $newPassword_cfh = password_hash($_POST['password_cfh'], PASSWORD_DEFAULT);
 
         if (empty($newPassword) || empty($newPassword_cfh)) {
-            throw new \InvalidArgumentException('Entrée invalide');
+            throw new \InvalidArgumentException('Invalid input');
         }
 
         // Valider l'adresse email

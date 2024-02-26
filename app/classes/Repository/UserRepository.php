@@ -70,7 +70,7 @@ class UserRepository
     public function getUserByEmail(array $data): array
     {
     try {
-        $sql = "SELECT * FROM user WHERE `AdresseMail` = :AdresseMail;";
+        $sql = "SELECT * FROM user WHERE `AdresseMail` = :email;";
         $sth = $this->pdo->prepare($sql);
 
         if (!$sth) {
