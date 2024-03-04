@@ -25,7 +25,7 @@ class Session {
     }
 
 
-
+   
 
     
     public function destroy() {

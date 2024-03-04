@@ -89,8 +89,16 @@ class UserRepository
     } catch (\PDOException $e) {
         throw new \RuntimeException("Error fetching user by email: " . $e->getMessage());
     }
-
+    
     }
+    
+    public function getUsersByRole() {
+        $sql = "SELECT * FROM user WHERE Role = 'Client'";
+        $sth = $this->pdo->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 
 }
 

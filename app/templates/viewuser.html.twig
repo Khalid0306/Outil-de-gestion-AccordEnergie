@@ -1,0 +1,77 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %} 
+    {% include "navbar.html.twig" %}
+    <div class="container">
+        <h2>Liste des Clients</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Numéro de téléphone</th>
+                    <th>Adresse</th>
+                    <th>Role</th>
+                    <th>Actions</th> <!-- Nouvelle colonne pour les boutons d'action -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clientList %}
+                    <tr>
+                        <td>{{ client.Id }}</td>
+                        <td>{{ client.Nom }}</td>
+                        <td>{{ client.Prenom }}</td>
+                        <td>{{ client.AdresseMail }}</td>
+                        <td>{{ client.NumeroTel }}</td>
+                        <td>{{ client.Adresse }}</td>
+                        <td>{{ client.Role }}</td>
+                        <td>
+                            <a href="process_modify_personnel.php",{'Id': client.Id}" class="btn btn-info">Modifier</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <li><a href="" class="btn btn-info">Dashboard</a></li>
+    </div>
+
+    <style>
+        /* Votre style existant reste inchangé */
+
+        /* Ajoutez des styles pour les boutons d'action */
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+    </style>
+
+    <footer>
+        {% include "footer.html.twig" %}
+    </footer>
+{% endblock %}

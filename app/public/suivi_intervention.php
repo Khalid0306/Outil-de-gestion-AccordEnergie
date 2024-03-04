@@ -10,26 +10,51 @@ if (!isset($_SESSION['user'])){
 
 
 // Fonction pour obtenir la liste des interventions avec leur suivi
-function getSuiviInterventions($conn) {
-    $sql = "SELECT * FROM suiviintervention";
-    $result = $conn->query($sql);
+// function getSuiviInterventions($conn) {
+//     $sql = "SELECT * FROM suiviintervention";
+//     $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-        // Retourner les données sous forme de tableau associatif
-        return $result->fetch_all(MYSQLI_ASSOC);
-    } else {
-        return array(); // Aucune intervention trouvée
-    }
+  
+// }
+ 
+$sql = "SELECT * FROM suiviintervention";
+
+// Exécution de la requête
+$result = $mysqli->query($sql);
+
+// Vérification des erreurs d'exécution de la requête
+if (!$result) {
+    die("Erreur lors de l'exécution de la requête : " . $mysqli->error);
 }
 
-// Exemple d'utilisation de la fonction pour obtenir la liste des interventions avec leur suivi
-//$suiviInterventions = getSuiviInterventions($conn);
+// Affichage des données
+echo "<table border='1'>
+        <tr>
+            <th>Id</th>
+            <th>Id_intervention</th>
+            <th>Suivi</th>
+            <th>Created_at</th>
+            <th>Updated_at</th>
+        </tr>";
 
-// Fermer la connexion à la base de données
-//$conn->close();
+while ($row = $result->fetch_assoc()) {
+    echo "<tr>
+            <td>{$row['Id']}</td>
+            <td>{$row['Id_intervention']}</td>
+            <td>{$row['Suivi']}</td>
+            <td>{$row['Created_at']}</td>
+            <td>{$row['Updated_at']}</td>
+          </tr>";
+}
+
+echo "</table>";
+
+// Fermeture de la connexion
+$mysqli->close();
 
 
 // Afficher la page avec Twig
 echo $page->render('suivi_intervention.html.twig', ['msg' => $msg, 'suiviInterventions' => $suiviInterventions]);
+?>
 
 

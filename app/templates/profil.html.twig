@@ -1,9 +1,10 @@
 {% extends "base_auth.html.twig" %}
 {% block body %}
-<<<<<<< HEAD
+
     {% include "navbar.html.twig" %}
 
     <!-- Add your stylesheets and scripts here -->
+    <link rel="stylesheet" href="style.css">
 
     <div class="container">
         <div class="row">
@@ -83,107 +84,27 @@
             </div>
         </div>
     </div>
+    <a href="logout.php" class="link-secondary text-decoration-none">logout</a>
    
 
     {% if msg %}
         <p>{{ msg }}</p>
     {% endif %}
-    <style>
-        /* Ajoutez ces styles dans votre fichier CSS ou dans une balise <style> dans votre fichier HTML */
     
-            .container {
-                margin-top: 20px;
-            }
-            
-            .card {
-                border: 1px solid #ccc;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
-            
-            .card-title {
-                text-align: center;
-                padding: 20px 0;
-            }
-            
-            .nav-tabs {
-                border-bottom: 2px solid #007bff;
-            }
-            
-            .nav-tabs .nav-item {
-                margin-bottom: -1px;
-            }
-            
-            .nav-tabs .nav-link {
-                border: 1px solid transparent;
-                border-radius: 10px 10px 0 0;
-                color: #007bff;
-            }
-            
-            .nav-tabs .nav-link.active {
-                border-color: #007bff #007bff #fff;
-                border-bottom: 2px solid #fff;
-            }
-            
-            .tab-content {
-                padding: 20px;
-            }
-            
-            label {
-                font-weight: bold;
-            }
-            
-            .row {
-                margin-bottom: 10px;
-            }
-            
-            .btn {
-                margin-top: 10px;
-            }
-            
-            /* Styles spécifiques au bouton de déconnexion */
-            .btn-danger {
-                background-color: #dc3545;
-                color: #fff;
-            }
-            
-            /* Styles spécifiques au bouton de suivi des interventions */
-            .btn-primary {
-                background-color: #007bff;
-                color: #fff;
-            }
-            
-    </style>
     
 <div>
 </div> 
-<a href="suivi_intervention.php"> suivi
-</a>  <input type="submit" name="sends" value="deconnect">
+
+
 <div>  
         
     </div>
     <footer>
         {% include "footer.html.twig" %}
     </footer>
-=======
-{% include "navbar.html.twig" %}
-<body>
-    <h1>Bienvenue sur ma page</h1>
-    
-    {% if msg %}
-        <p>{{ msg }}</p>
-    {% endif %}
 
-    {% if userData %}
-        <p>Email : {{ userData.AdresseMail  }}</p>
-        <!-- Ajoutez d'autres champs selon votre structure de données en session -->
-    {% endif %}
-    
-<input type="submit" name="sends" value="disconnect">
-<footer>
-{% include "footer.html.twig" %}
 </footer>
 </body>
 </html>
->>>>>>> 2adb1f506a9da5c7e95d346ae258506068bddb45
+
 {% endblock %}

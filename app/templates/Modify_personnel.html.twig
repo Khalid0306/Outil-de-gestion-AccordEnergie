@@ -1,0 +1,93 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %} 
+    {% include "navbar.html.twig" %}
+    <div class="container">
+        <h2>Modifier le Personnel</h2>
+
+        <form method="post" action="process_modify_personnel.php">
+            <input type="hidden" name="user_id" value="{{ client.Id }}">
+            
+            <label for="Nom">Nom :</label>
+            <input type="text" name="Nom" value="{{ client.Nom }}" required>
+
+            <label for="Prenom">Prénom :</label>
+            <input type="text" name="Prenom" value="{{ client.Prenom }}" required>
+
+            <label for="email">Email :</label>
+            <input type="email" name="email" value="{{ client.AdresseMail }}" required>
+
+            <label for="NumeroTel">Numéro de téléphone :</label>
+            <input type="tel" name="NumeroTel" value="{{ client.NumeroTel }}" required>
+
+            <label for="Adresse">Adresse :</label>
+            <input type="text" name="Adresse" value="{{ client.Adresse }}" required>
+
+            <!-- Autres champs du formulaire à ajouter selon vos besoins -->
+
+            <button type="submit" name="update" class="btn btn-primary">Modifier</button>
+        </form>
+        
+       // <a href="dashbord_admin.php" class="btn btn-info">Retour au Tableau de bord</a>
+    </div>
+
+    <style>
+        /* Ajoutez vos styles CSS ici */
+
+        .container {
+            margin-top: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+    </style>
+
+    <footer>
+        {% include "footer.html.twig" %}
+    </footer>
+{% endblock %}

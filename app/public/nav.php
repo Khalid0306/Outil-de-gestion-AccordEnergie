@@ -11,4 +11,4 @@ if ($page->Session->isConnected()) {
     exit; // Assurez-vous de terminer l'exécution du script après la redirection
 }
 
-echo $page->render('navbar.html.twig', []);
+echo $page->render('navbar.html.twig', ['user' => $userData]);
