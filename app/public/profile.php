@@ -19,8 +19,6 @@ if (!isset($_SESSION['user'])){
 
 echo $page->render('profil.html.twig', [ 'user' => $userData]);
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -30,6 +28,3 @@ if (isset($_POST['sends'])) {
 }
 echo $page->render('suivi_intervention.php', [ 'msg' =>$msg]);
 
->>>>>>> 2adb1f506a9da5c7e95d346ae258506068bddb45
-
->>>>>>> 8f929c11daec6ab5c195a60f9d43802432feb885
