@@ -64,7 +64,7 @@ class UserRepository
         $sth->execute();
     }
 
-<<<<<<< HEAD
+
 // get id commementaire
 
 
@@ -99,8 +99,8 @@ try {
 
 
 
-=======
->>>>>>> origin/main
+
+
 
 
     //Fonction pour récuper l'user par son Email
