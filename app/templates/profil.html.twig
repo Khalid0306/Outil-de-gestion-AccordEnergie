@@ -102,9 +102,45 @@
     <footer>
         {% include "footer.html.twig" %}
     </footer>
+<<<<<<< HEAD
 
+=======
+
+
+{% include "navbar.html.twig" %}
+<body>
+    <h1>Bienvenue sur ma page</h1>
+    
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+
+    {% if userData %}
+        <p>Email : {{ userData.AdresseMail  }}</p>
+        <!-- Ajoutez d'autres champs selon votre structure de données en session -->
+
+
+
+        <a href="get_stat.php" class="link-secondary text-decoration-none">Standardiste ?</a>
+    {% endif %}
+    
+<input type="submit" name="send" value="disconnect">
+
+    {% endif %}
+    
+<input type="submit" name="sends" value="disconnect">
+
+<footer>
+{% include "footer.html.twig" %}
+>>>>>>> 8f929c11daec6ab5c195a60f9d43802432feb885
 </footer>
 </body>
 </html>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2adb1f506a9da5c7e95d346ae258506068bddb45
+
+>>>>>>> 8f929c11daec6ab5c195a60f9d43802432feb885
 {% endblock %}

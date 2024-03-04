@@ -1,0 +1,56 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+    {% include "navbar.html.twig" %}
+    <div class="bg-light py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="bg-white p-4 p-md-5 rounded shadow-sm">
+                        <div class="text-center mb-4">
+                            <a href="#!">
+                                <img src="./img/images.png" alt="Logo" width="175" height="100">
+                            </a>
+                        </div>
+                        <h1 class="text-center mb-4">Suivi d'Intervention</h1>
+                        {% if msg %}
+                            <div class="alert alert-success" role="alert">
+                                {{ msg }}
+                            </div>
+                        {% endif %}
+                        <div class="row gy-3 gy-md-4">
+                         
+                            {% for intervention in interventions %}
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">ID Intervention: {{ intervention.Id }}</h5>
+                                            <p class="card-text">Statut: {{ intervention.Label }}</p>
+                                            
+                                             <p class="card-text">suivi: {{ intervention.Labele }}</p>
+
+                                            <p class="card-text">commentaire: {{ intervention.commentaire }}</p>
+                                            <h4> Client: </h4>
+                                            <p class="card-text">id: {{ intervention.Id_client }}</p>
+                                            <p class="card-text">nom: {{ intervention.Nom }}</p>
+                                            
+
+
+
+                                           
+                                            <div class="btn-group" role="group" aria-label="Actions">
+                                                <a href="#" class="btn btn-primary">Modifier</a>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "footer.html.twig" %}
+{% endblock %}

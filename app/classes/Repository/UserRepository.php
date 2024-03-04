@@ -65,6 +65,43 @@ class UserRepository
     }
 
 
+// get id commementaire
+
+
+
+public function getAllstatuts(array $data): array
+{
+try {
+    $sql = "SELECT * FROM c WHERE `AdresseMail` = :AdresseMail;";
+    $sth = $this->pdo->prepare($sql);
+
+    if (!$sth) {
+        throw new \RuntimeException("Error preparing the query: " . $this->pdo->errorInfo()[2]);
+    }
+
+    foreach ($data as $key => $value) {
+        $sth->bindValue(":$key", $value);
+    }
+
+    if (!$sth->execute()) {
+        throw new \RuntimeException("Error executing the query: " . $sth->errorInfo()[2]);
+    }
+
+    return $sth->fetch(\PDO::FETCH_ASSOC) ?: [];
+} catch (\PDOException $e) {
+    throw new \RuntimeException("Error fetching user by email: " . $e->getMessage());
+}
+
+}
+
+
+
+
+
+
+
+
+
 
     //Fonction pour récuper l'user par son Email
     public function getUserByEmail(array $data): array
