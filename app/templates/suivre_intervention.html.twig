@@ -1,0 +1,42 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %} 
+{% include "navbar.html.twig" %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi des interventions</title>
+</head>
+<body>
+    <h1>Suivi des interventions</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>État</th>
+                <th>Date de création</th>
+                <th>Date de mise à jour</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for intervention in interventions %}
+                <tr>
+                    <td>{{ intervention.Id }}</td>
+                    <td>{{ intervention.Suivi }}</td>
+                    <td>{{ intervention.Created_at|date("Y-m-d H:i:s") }}</td>
+                    <td>{{ intervention.Updated_at|date("Y-m-d H:i:s") }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+{% include "footer.html.twig" %}
+{% endblock %}
