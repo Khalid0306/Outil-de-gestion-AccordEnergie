@@ -8,17 +8,8 @@ $msg = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($page->Session->asRole('Standardiste')) {
-        // Récupère l'id du standardiste
-        //$queryStand = "SELECT id FROM USER WHERE id=:id";
-        //$stmtStand = $page->pdo->prepare($queryStand);
-
-
-        
-
         // Récupère l'id de l'utilisateur actuel
         $user = $page->Session->get('user');
-
-        
 
         // Insère dans la table intervention
         $sql = "INSERT INTO intervention (Id_statuts, Id_Standardiste ) 
@@ -30,32 +21,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             "userId"        => $user['Id']
         ]);
 
+        // Additional logic can be added here if needed
 
-
-
-
-
-
-
-
-
-
-        /*$sql = "UPDATE intervention i 
-        SET i.id_statuts = :statusId
-        WHERE   i.id_standardiste = :id";*/
-
+        // The following line exits the script, which might not be necessary
         exit();
     } else {
-        echo ("Standardiste non connecté");
+        echo "Standardiste non connecté";
     }
 }
 
-$intervenants = $page->getAllIntervenants();
-$suivis = 
-$status = 
 
-echo $page->render('staetut.html.twig', [
-    'suivis' = $suivis,
+// $intervenants = $page->getAllIntervenants();
 
-]);
-?>
+
+echo $page->render('staetut.html.twig', []);
+

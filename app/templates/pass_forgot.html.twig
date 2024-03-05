@@ -1,37 +1,51 @@
 {% extends "base_auth.html.twig" %}
 
-{% block body %} 
-{% include "navbar.html.twig" %}
-<h1>Changer le mot de passes</h1>
+{% block body %}
+	{% include "navbar.html.twig" %}
+	<body>
+		<section class="gradient-custom">
+			<div class="container py-5 ">
+				<div class="row justify-content-center align-items-center h-100">
+					<div class="col-12 col-lg-9 col-xl-7">
+						<div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+							<div class="card-body p-4 p-md-5">
+								<div class="col-12">
+									<div class="text-center mb-5">
+										<a href="#!">
+											<img src="./img/images.png" alt="Logo" width="175" height="100">
+										</a>
+									</div>
+								</div>
+								<h3 class="mb-4 pb-2 pb-md-0 mb-md-5 justify-content-center">Changer le mot de passe</h3>
+								<form action="" method="post">
+									{% if msg %}
+										<div>{{msg}}
+										</div>
+									{% endif %}
 
-    <form action="" method="post">
-        
+									<div>
+										<div>
+											<label for="passwordreset">Mot de passe :</label>
+											<input type="password" name="password" id="passwordreset" placeholder="entrez votre password" required><br><br>
+										</div>
 
-        <div>
-        
-         <div>
+										<div>
+											<label for="passwordreset1">confirmer Mot de passe :</label>
+											<input type="password" name="password_cfh" id="passwordreset1" placeholder="confirmer  votre password" required><br><br>
+										</div>
 
- 
+										<div class="mt-4 pt-2">
+											<input class="btn btn-primary btn-lg" type="submit" value="Modifier" name="send"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</section>
+					<footer>
+						{% include "footer.html.twig" %}
+					</footer>
+				</body>
+			</html>
 
-        <label for="passwordreset">Mot de passe :</label>
-        <input type="password" name="password" id="passwordreset" placeholder="entrez votre password"  required><br><br>
-  </div>
-        
-        
-         <div>
-        <label for="passwordreset1">confirmer Mot de passe :</label>
-        <input type="password" name="password_cfh" id="passwordreset1"   placeholder="confirmer  votre password" required><br><br>
-          </div>
-        
-        
-        <input type="submit" name="sendReset" value="send">
-    </form>
-    <p>
-
-</p>
-<footer>
-{% include "footer.html.twig" %}
-</footer>
-</body>
-</html>
- {% endblock %}
+		{% endblock %}

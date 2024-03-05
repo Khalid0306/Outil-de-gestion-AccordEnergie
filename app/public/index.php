@@ -27,10 +27,9 @@ if (isset($_POST['send'])) {
                 header('Location: profile.php');
             }
         } else {
-            $msg = "Mot de passe incorrect";
+            $msg = "Mot de passe ou Email ";
         }
     }
 }
 
 echo $page->render('index.html.twig', ['msg' => $msg]);
-?>

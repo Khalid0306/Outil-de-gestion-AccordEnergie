@@ -1,0 +1,15 @@
+.calendar__table{
+    width: 100%;
+    height: calc(100vh - 128px);
+}
+
+.calendar__table td{
+    padding: 10px;
+    border: 1px solid #ccc;
+    vertical-align: top;
+    width: 14.29%;
+}
+
+.calendar__table--5weeks td{
+    height: 20%;
+}

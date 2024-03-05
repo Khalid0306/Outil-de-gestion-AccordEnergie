@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% block body %}
+    {% include "navbar.html.twig" %}
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/css/calendrier.css" /> 
+    {% endblock %}
+    <body>
+        <h1>{{ month.tostring() }}</h1>
+
+        <table class="calendar__table calendar__table--{{ month.getWeeks() }}">
+            {% for i in 0..month.getWeeks() %}
+                <tr>
+                    {% for key, jour in month.days %}
+                        <td>
+                            <div class="calendar__weekday">{{ jour }}</div>
+                            <div class="calendar__day">{{ testStart[i][key] }}</div>
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+    <footer>
+        {% include "footer.html.twig" %}
+    </footer>
+{% endblock %}

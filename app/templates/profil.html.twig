@@ -84,9 +84,9 @@
             </div>
         </div>
     </div>
-    <a href="logout.php" class="link-secondary text-decoration-none">logout</a>
-   
-
+    <div>
+   <a href="get_stat.php" class="link-secondary text-decoration-none">Standardiste ?</a>
+    </div>
     {% if msg %}
         <p>{{ msg }}</p>
     {% endif %}
@@ -103,35 +103,4 @@
         {% include "footer.html.twig" %}
     </footer>
 
-
-
-{% include "navbar.html.twig" %}
-<body>
-    <h1>Bienvenue sur ma page</h1>
-    
-    {% if msg %}
-        <p>{{ msg }}</p>
-    {% endif %}
-
-    {% if userData %}
-        <p>Email : {{ userData.AdresseMail  }}</p>
-        <!-- Ajoutez d'autres champs selon votre structure de données en session -->
-
-
-
-        <a href="get_stat.php" class="link-secondary text-decoration-none">Standardiste ?</a>
-    {% endif %}
-    
-<input type="submit" name="send" value="disconnect">
-
-    {% endif %}
-    
-<input type="submit" name="sends" value="disconnect">
-
-<footer>
-{% include "footer.html.twig" %}
-
-</footer>
-</body>
-</html>
 {% endblock %}

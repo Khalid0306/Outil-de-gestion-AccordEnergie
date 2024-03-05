@@ -45,4 +45,4 @@ $suivis = array(); // Vous devrez définir ce tableau en fonction de votre logiq
 echo $page->render('suivi.html.twig', [
     'suivis' => $suivis,
 ]);
-?>
+
