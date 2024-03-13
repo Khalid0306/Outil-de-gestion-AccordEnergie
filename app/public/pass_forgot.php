@@ -7,7 +7,7 @@ $msg = false;
 $page = new Page();
 $userRepo = new UserRepository($page->pdo);
 
-if (isset($_POST['send'])) {
+if (isset($_POST['sendRequest'])) {
     //On vérifie si l'email est valide 
     $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 
@@ -15,7 +15,7 @@ if (isset($_POST['send'])) {
         // Gestion d'erreur pour l'adresse email invalide
         $msg = "Veuillez fournir une adresse email valide.";
     } else {
-        $userData = $userRepo->getUserByEmail(['AdresseMail' => $email]);
+        $userData = $userRepo->getUserByEmail(['email' => $email]);
 
         if ($userData) {
             $page->Session->add('user', $userData);

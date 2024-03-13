@@ -33,3 +33,4 @@ if (isset($_POST['send'])) {
 }
 
 echo $page->render('index.html.twig', ['msg' => $msg]);
+?>

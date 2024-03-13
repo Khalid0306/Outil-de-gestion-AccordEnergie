@@ -8,8 +8,23 @@
     border: 1px solid #ccc;
     vertical-align: top;
     width: 14.29%;
+    height: 20%;
 }
 
 .calendar__table--5weeks td{
     height: 20%;
+}
+
+.calendar__weekday{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.calendar__day{
+    font-size: 1.3rem;
+}
+
+.calendar__othermonth .calendar__day{
+    opacity: 0.5;
 }

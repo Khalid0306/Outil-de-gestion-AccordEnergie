@@ -15,25 +15,23 @@ $Date = new Month();
 
 try {
     $month = new Month(month: $_GET['month'] ?? null, year: $_GET['year'] ?? null);
-} catch (\Exception $e) {
-    $month = new App\Date\Month(); 
-}
+    
+    $testStart = [];
 
-$testStart = [];
+    $start = $month->getStartingDay()->modify('Last monday');
 
-$start = $month->getStartingDay()->modify('Last monday');
-
-for ($i = 0; $i < $month->getWeeks(); $i++) { 
-    foreach ($month->days as $key => $day) {
-        $modifiedDate = (clone $start);
-        
-        $modifiedDate->modify("+" . ($key + $i * 7) . "days");
-
-        $test[$i][] = $modifiedDate->format('d');
+    for ($i = 0; $i < $month->getWeeks(); $i++) { 
+        foreach ($month->days as $key => $day) {
+            $modifiedDate = (clone $start)->modify("+" . ($key + $i * 7) . "days");
+            $test[$i][] = $modifiedDate->format('d');
+        }
     }
-}
+    
+    $testStart = $test;
 
-$testStart = $test;
+} catch (Exception $e) {
+    $msg = 'An error occurred: ' . $e->getMessage();
+}
 
 echo $page->render('calendrier.html.twig', [
     'msg' => $msg,
@@ -41,4 +39,4 @@ echo $page->render('calendrier.html.twig', [
     'start' => $start,
     'testStart' => $testStart
 ]);
-?>
+

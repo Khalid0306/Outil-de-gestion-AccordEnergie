@@ -1,19 +1,26 @@
-<!DOCTYPE html>
 {% block body %}
     {% include "navbar.html.twig" %}
     {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="/css/calendrier.css" /> 
+        <link rel="stylesheet" type="text/css" href="/css/calendrier.css" /> 
     {% endblock %}
     <body>
-        <h1>{{ month.tostring() }}</h1>
-
+    <div class ="d-flex flex-row align-items-center justify-content-between mx-ms-3">
+     <h1>{{ month.tostring() }}</h1>
+     <div>
+        <a href="#" class="btn btn-primary">&lt</a>
+        <a href="#" class="btn btn-primary">&gt</a>
+     </div>
+    </div>
         <table class="calendar__table calendar__table--{{ month.getWeeks() }}">
-            {% for i in 0..month.getWeeks() %}
+            {% for i in 0..month.getWeeks() - 1 %}
                 <tr>
                     {% for key, jour in month.days %}
-                        <td>
-                            <div class="calendar__weekday">{{ jour }}</div>
-                            <div class="calendar__day">{{ testStart[i][key] }}</div>
+                        {% set currentDate = start|date_modify("+" ~ (key + i * 7) ~ "days") %}
+                        <td class="{{ month.withinMonth(currentDate) ? '' : 'calendar__othermonth' }}">
+                        {% if i == 0 %}
+                        <div class="calendar__weekday">{{ jour }}</div>
+                        {% endif %}
+                            <div class="calendar__day">{{ currentDate.format('d') }}</div>
                         </td>
                     {% endfor %}
                 </tr>
