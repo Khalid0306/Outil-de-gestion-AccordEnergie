@@ -15,8 +15,12 @@
     height: 20%;
 }
 
+.calendar__table--6weeks td{
+    height: 16.66%;
+}
+
 .calendar__weekday{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #000;
 }
@@ -26,5 +30,5 @@
 }
 
 .calendar__othermonth .calendar__day{
-    opacity: 0.5;
+    opacity: 0.4;
 }

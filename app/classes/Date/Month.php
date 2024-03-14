@@ -28,13 +28,13 @@ class Month
       10 => 'Octobre',
       11 => 'Novembre', 
       12 => 'Décembre'];
-   private $year;
+   public $year;
 
-   private string $month;
+   public $month;
 
    public function __construct(?string $month = null, ?int $year = null)
    {
-      if ($month === null){
+      if ($month === null || $month < 1 || $month > 12){
          $month = date('m');
       }
 
@@ -96,8 +96,8 @@ class Month
    public function nextMonth (): Month{
       $monthInt = intval($this->month) + 1;
       $year = $this->year;
-
-      if($monthInt > 12){
+      
+      if($monthInt > 13){
          $monthInt = 1;
          $year += 1;
       }
