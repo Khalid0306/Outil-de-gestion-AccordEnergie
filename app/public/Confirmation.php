@@ -17,7 +17,7 @@ if (isset($_POST['send'])) {
         $userData = $page->Session->get('user');
         $emailUser = $userData['AdresseMail'];
 
-        $getUpdate = $userRepo->updatePassword($newPassword, $newPassword_cfh, $emailUser);
+        $userRepo->updatePassword($newPassword, $newPassword_cfh, $emailUser);
     } catch (\PDOException $e) {
         $msg = 'Erreur lors de la mise à jour du mot de passe: ' . $e->getMessage();
     } catch (\InvalidArgumentException $e) {

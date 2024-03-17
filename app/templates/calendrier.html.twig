@@ -11,16 +11,22 @@
         <a href="/calendrier.php?month={{month.nextMonth().month}}&year={{month.nextMonth().year}}" class="btn btn-primary">&gt</a>
      </div>
     </div>
-        <table class="calendar__table calendar__table--{{ month.getWeeks()}}weeks">
-            {% for i in 0..month.getWeeks() - 1 %}
+        <table class="calendar__table calendar__table--{{weeks}}weeks">
+            {% for i in 0..weeks - 1 %}
                 <tr>
                     {% for key, jour in month.days %}
                         {% set currentDate = start|date_modify("+" ~ (key + i * 7) ~ "days") %}
+                        {% set eventsForDay = events[currentDate.format('Y-m-d')] ?? [] %}
                         <td class="{{ month.withinMonth(currentDate) ? '' : 'calendar__othermonth' }}">
                         {% if i == 0 %}
                         <div class="calendar__weekday">{{ jour }}</div>
                         {% endif %}
                             <div class="calendar__day">{{ currentDate.format('d') }}</div>
+                            {% for key, event in eventsForDay %}
+                                <div class = "calendar__event">
+                                 {{(events_result[key]['heure'])|date('H:i')}} - {{events_result[key]['Id']}}
+                                </div>
+                            {% endfor %}
                         </td>
                     {% endfor %}
                 </tr>
