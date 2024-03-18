@@ -5,7 +5,7 @@
     {% endblock %}
     <body>
     <div class ="d-flex flex-row align-items-center justify-content-between mx-ms-3">
-     <h1>{{ month.tostring() }}</h1>
+     <h1>{{ h(month.tostring()) }}</h1>
      <div>
         <a href="/calendrier.php?month={{month.previousMonth().month}}&year={{month.previousMonth().year}}" class="btn btn-primary">&lt</a>
         <a href="/calendrier.php?month={{month.nextMonth().month}}&year={{month.nextMonth().year}}" class="btn btn-primary">&gt</a>
@@ -19,9 +19,9 @@
                         {% set eventsForDay = events[currentDate.format('Y-m-d')] ?? [] %}
                         <td class="{{ month.withinMonth(currentDate) ? '' : 'calendar__othermonth' }}">
                         {% if i == 0 %}
-                        <div class="calendar__weekday">{{ jour }}</div>
+                        <div class="calendar__weekday">{{ h(jour) }}</div>
                         {% endif %}
-                            <div class="calendar__day">{{ currentDate.format('d') }}</div>
+                            <div class="calendar__day">{{ h(currentDate.format('d'))}}</div>
                             {% for key, event in eventsForDay %}
                                 <div class = "calendar__event">
                                  {{(events_result[key]['heure'])|date('H:i')}} - <a href="/event.php?Id={{events_result[key]['Id']}}">{{events_result[key]['titre']}}</a>

@@ -21,6 +21,13 @@ class Page
             'debug' => true
         ]);
 
+        $this->twig->addFunction(new \Twig\TwigFunction('h', function (?string $value) {
+            if ($value === null) {
+                return '';
+            }
+            return htmlentities($value);
+        }));
+
         try {
             $dsn = 'mysql:host=mysql;dbname=projet';
             $username = 'root';

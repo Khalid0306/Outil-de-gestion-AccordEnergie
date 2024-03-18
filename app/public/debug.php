@@ -8,3 +8,7 @@ function dd(...$vars) {
     }
 
 }
+
+function h(string $value): string{
+    return htmlentities($value);
+}

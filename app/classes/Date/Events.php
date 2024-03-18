@@ -1,11 +1,13 @@
 <?
+
 namespace Date;
 
 use App\Page;
 
 require '../classes/Page.php';
 
-class Events {
+class Events
+{
 
     private \PDO $pdo;
 
@@ -14,7 +16,8 @@ class Events {
         $this->pdo = $pdo;
     }
 
-    public function getEvents(\DateTime $start_date, \DateTime $end_date) : array {
+    public function getEvents(\DateTime $start_date, \DateTime $end_date): array
+    {
         $sql = "SELECT * FROM intervention 
         WHERE date BETWEEN '{$start_date->format('Y-m-d 00:00:00')}' AND '{$end_date->format('Y-m-d 23:59:59')}'
         ORDER BY heure";
@@ -25,29 +28,44 @@ class Events {
         return $results;
     }
 
-    public function getEventsById($id) : array {
+    public function getEventsById($id): ?array
+    {
         $sql = "SELECT * FROM intervention WHERE Id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
-        $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        return $results;
+        // Vérifier si l'ID existe
+        if (!$result) {
+            return null;
+        }
+
+        return $result;
     }
 
-    public function getEventsDataById($id) : array {
-        $sql = "SELECT * FROM intervention WHERE Id = :id
-                FULL JOIN commentaire ON  intervention.Id = commentaire.Id_intervention";
+    public function getEventsDataById($id): ?array
+    {
+        $sql = "SELECT * FROM intervention 
+            LEFT JOIN commentaire ON intervention.Id = commentaire.Id_commentaire
+            WHERE intervention.Id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
-        $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        return $results;
+        // Vérifier si l'ID existe
+        if (!$result) {
+            return null;
+        }
+
+        return $result;
     }
 
-    public function getEventsByDay(\DateTime $start_date, \DateTime $end_date) : array {
+
+    public function getEventsByDay(\DateTime $start_date, \DateTime $end_date): array
+    {
         $events = $this->getEvents($start_date, $end_date);
         $days = [];
-        foreach($events as $event){
+        foreach ($events as $event) {
             $date = explode(' ', $event['date'])[0];
             if (!isset($days[$date])) {
                 $days[$date] = [$event];
@@ -57,5 +75,4 @@ class Events {
         }
         return $days;
     }
-
 }

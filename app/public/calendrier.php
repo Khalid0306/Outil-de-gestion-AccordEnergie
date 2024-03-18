@@ -2,6 +2,7 @@
 require '../vendor/autoload.php';
 require '../classes/Date/Month.php';
 require '../classes/Date/Events.php';
+require '../public/debug.php';
 
 use Date\Month;
 use Date\Events;
@@ -13,6 +14,7 @@ $msg = false;
 $Date = new Month();
 $events= new Events($page->pdo);
 $title = "Calendrier";
+
 
 // if (!isset($_SESSION['user'])){
 //     header('Location: index.php');
