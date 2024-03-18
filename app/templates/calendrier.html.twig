@@ -24,7 +24,7 @@
                             <div class="calendar__day">{{ currentDate.format('d') }}</div>
                             {% for key, event in eventsForDay %}
                                 <div class = "calendar__event">
-                                 {{(events_result[key]['heure'])|date('H:i')}} - {{events_result[key]['Id']}}
+                                 {{(events_result[key]['heure'])|date('H:i')}} - <a href="/event.php?Id={{events_result[key]['Id']}}">{{events_result[key]['titre']}}</a>
                                 </div>
                             {% endfor %}
                         </td>

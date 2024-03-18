@@ -12,6 +12,7 @@ $page = new Page();
 $msg = false;
 $Date = new Month();
 $events= new Events($page->pdo);
+$title = "Calendrier";
 
 // if (!isset($_SESSION['user'])){
 //     header('Location: index.php');
@@ -50,6 +51,8 @@ echo $page->render('calendrier.html.twig', [
     'start' => $start,
     'events' => $eventsByday,
     'events_result' => $events_result,
-    'testStart' => $testStart
+    'testStart' => $testStart,
+    'title' => $title
+
 ]);
 

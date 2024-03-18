@@ -16,9 +16,29 @@ class Events {
 
     public function getEvents(\DateTime $start_date, \DateTime $end_date) : array {
         $sql = "SELECT * FROM intervention 
-        WHERE date BETWEEN '{$start_date->format('Y-m-d 00:00:00')}' AND '{$end_date->format('Y-m-d 23:59:59')}'";
+        WHERE date BETWEEN '{$start_date->format('Y-m-d 00:00:00')}' AND '{$end_date->format('Y-m-d 23:59:59')}'
+        ORDER BY heure";
         // var_dump($sql);
         $stmt = $this->pdo->query($sql);
+        $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+
+    public function getEventsById($id) : array {
+        $sql = "SELECT * FROM intervention WHERE Id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+
+    public function getEventsDataById($id) : array {
+        $sql = "SELECT * FROM intervention WHERE Id = :id
+                FULL JOIN commentaire ON  intervention.Id = commentaire.Id_intervention";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
         $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         return $results;
