@@ -31,6 +31,11 @@ try {
     $end = (clone $start)->modify('+' . (6 + 7 * ($weeks -1)) . ' days' );
     $eventsByday = $events->getEventsByDay($start, $end);
     $events_result = $events->getEvents($start, $end);
+    $statusInterventions = [];
+    foreach ($events_result as $key => $data) {
+        $statusInterventions[$key] = $events->getStatusEventById($data['Id']);
+    }
+    // var_dump($statusInterventions);
     // var_dump($events_result);
 
     for ($i = 0; $i < $weeks; $i++) { 
@@ -53,6 +58,7 @@ echo $page->render('calendrier.html.twig', [
     'start' => $start,
     'events' => $eventsByday,
     'events_result' => $events_result,
+    'statutsEvent' => $statusInterventions,
     'testStart' => $testStart,
     'title' => $title
 

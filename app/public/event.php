@@ -17,10 +17,6 @@ $events= new Events($page->pdo);
 $intervention_data = $events->getEventsById($_GET['Id'] ?? null);
 $eventName = null; 
 
-if (!isset($_GET['Id']) || $intervention_data === null) {
-    header('location: 404.php');
- } 
-
 foreach ($intervention_data as $key => $data) {
     $eventName = $data['titre'];
     break; 

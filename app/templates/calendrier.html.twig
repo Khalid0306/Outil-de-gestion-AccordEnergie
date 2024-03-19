@@ -1,39 +1,69 @@
 {% block body %}
-    {% include "navbar.html.twig" %}
-    {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="/css/calendrier.css" /> 
-    {% endblock %}
-    <body>
-    <div class ="d-flex flex-row align-items-center justify-content-between mx-ms-3">
-     <h1>{{ h(month.tostring()) }}</h1>
-     <div>
-        <a href="/calendrier.php?month={{month.previousMonth().month}}&year={{month.previousMonth().year}}" class="btn btn-primary">&lt</a>
-        <a href="/calendrier.php?month={{month.nextMonth().month}}&year={{month.nextMonth().year}}" class="btn btn-primary">&gt</a>
-     </div>
-    </div>
-        <table class="calendar__table calendar__table--{{weeks}}weeks">
-            {% for i in 0..weeks - 1 %}
-                <tr>
-                    {% for key, jour in month.days %}
-                        {% set currentDate = start|date_modify("+" ~ (key + i * 7) ~ "days") %}
-                        {% set eventsForDay = events[currentDate.format('Y-m-d')] ?? [] %}
-                        <td class="{{ month.withinMonth(currentDate) ? '' : 'calendar__othermonth' }}">
-                        {% if i == 0 %}
-                        <div class="calendar__weekday">{{ h(jour) }}</div>
-                        {% endif %}
-                            <div class="calendar__day">{{ h(currentDate.format('d'))}}</div>
-                            {% for key, event in eventsForDay %}
-                                <div class = "calendar__event">
-                                 {{(events_result[key]['heure'])|date('H:i')}} - <a href="/event.php?Id={{events_result[key]['Id']}}">{{events_result[key]['titre']}}</a>
-                                </div>
-                            {% endfor %}
-                        </td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
-    </body>
-    <footer>
-        {% include "footer.html.twig" %}
-    </footer>
+	{% include "navbar.html.twig" %}
+	{% block stylesheets %}
+		<link rel="stylesheet" type="text/css" href="/css/calendrier.css"/>
+	{% endblock %}
+	<body>
+		<div class="calendar" id="calendar">
+			<div class="d-flex flex-row align-items-center justify-content-between mx-ms-3">
+				<h1>{{ h(month.tostring()) }}</h1>
+				<div >
+					<a href="/calendrier.php" class="btn btn-outline-primary">
+						<img src="/img/calendar.png" alt="Calendar" width="24" height="24">
+					</a>
+					<a href="#list" class="btn btn-outline-primary">
+                    <img src="/img/list.png" alt="list" width="24" height="24">
+                    
+                    </a>
+				</div>
+				<div>
+					<a href="/calendrier.php?month={{month.previousMonth().month}}&year={{month.previousMonth().year}}" class="btn btn-primary">&lt</a>
+					<a href="/calendrier.php?month={{month.nextMonth().month}}&year={{month.nextMonth().year}}" class="btn btn-primary">&gt</a>
+				</div>
+			</div>
+			<table class="calendar__table calendar__table--{{weeks}}weeks">
+				{% for i in 0..weeks - 1 %}
+					<tr>
+						{% for key, jour in month.days %}
+							{% set currentDate = start|date_modify("+" ~ (key + i * 7) ~ "days") %}
+							{% set eventsForDay = events[currentDate.format('Y-m-d')] ?? [] %}
+							{% set isToday = 'now'|date('Y-m-d') == currentDate.format('Y-m-d') %}
+							<td class="{{ month.withinMonth(currentDate) ? '' : 'calendar__othermonth' }} {{ isToday ? 'is-today' : '' }}">
+								{% if i == 0 %}
+									<div class="calendar__weekday">{{ h(jour) }}</div>
+								{% endif %}
+								<div class="calendar__day">{{ h(currentDate.format('d') )}}</div>
+								{% set eventCount = eventsForDay|length %}
+								{% for event in eventsForDay|slice(0, 3) %}
+									<div class="calendar__event">
+										<ul class="list-group">
+											<a href="/event.php?Id={{ event['Id'] }}" class="pe-auto text-decoration-none">
+												<li class=" {{ statutsEvent[key]['Id'] }} list-group-item list-group-item-action list-group-item-{% if event['Id_statuts'] == 1 %}success{% elseif event['Id_statuts'] == 2 %}warning{% elseif event['Id_statuts'] == 3 %}danger{% else %}primary{% endif %} rounded-2">
+													{{ event['heure']|date('H:i') }}
+													-
+													{{ event['titre'] }}
+												</li>
+											</a>
+										</ul>
+									</div>
+								{% endfor %}
+								{% if eventCount > 3 %}
+									<div class="calendar__event">
+										<button type="button" class="btn btn-secondary btn-sm btn-block" onclick="window.location.href='/autrepage.php?date={{ h(currentDate.format('Y-m-d')) }}'">
+											+{{ eventCount - 3 }}
+											événements de plus
+										</button>
+									</div>
+								{% endif %}
+							</td>
+						{% endfor %}
+					</tr>
+				{% endfor %}
+			</table>
+			<a href="#" class="calendar__button">+</a>
+		</div>
+	</body>
+	<footer>
+		{% include "footer.html.twig" %}
+	</footer>
 {% endblock %}

@@ -60,6 +60,23 @@ class Events
         return $result;
     }
 
+    public function getStatusEventById($id): ?array
+    {
+        $sql = "SELECT DISTINCT * FROM intervention 
+            INNER JOIN statusintervention ON intervention.Id_statuts = statusintervention.Id
+            WHERE intervention.Id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        // Vérifier si l'ID existe
+        if (!$result) {
+            return null;
+        }
+
+        return $result;
+    }
+
 
     public function getEventsByDay(\DateTime $start_date, \DateTime $end_date): array
     {

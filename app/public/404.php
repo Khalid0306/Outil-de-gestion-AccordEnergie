@@ -3,7 +3,6 @@
 require '../vendor/autoload.php';
 require '../classes/Date/Month.php';
 require '../classes/Date/Events.php';
-// require '../classes/Page.php';
 
 use Date\Month;
 use Date\Events;
