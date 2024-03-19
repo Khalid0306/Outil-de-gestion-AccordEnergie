@@ -1,56 +1,65 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
 
-form {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    /* Ajoutez ces styles dans votre fichier CSS ou dans une balise <style> dans votre fichier HTML */
 
-h2 {
-    text-align: center;
-    color: #333333;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555555;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-}
-
-input[type="submit"] {
-    background-color: #4caf50;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-a {
-    color: #3498db;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
+        .container {
+            margin-top: 20px;
+        }
+        
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .nav-tabs {
+            border-bottom: 2px solid #007bff;
+        }
+        
+        .nav-tabs .nav-item {
+            margin-bottom: -1px;
+        }
+        
+        .nav-tabs .nav-link {
+            border: 1px solid transparent;
+            border-radius: 10px 10px 0 0;
+            color: #007bff;
+        }
+        
+        .nav-tabs .nav-link.active {
+            border-color: #007bff #007bff #fff;
+            border-bottom: 2px solid #fff;
+        }
+        
+        .tab-content {
+            padding: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        .row {
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            margin-top: 10px;
+        }
+        
+        /* Styles spécifiques au bouton de déconnexion */
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        
+        /* Styles spécifiques au bouton de suivi des interventions */
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+        

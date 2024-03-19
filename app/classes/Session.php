@@ -21,11 +21,15 @@ class Session {
     }
 
     public function asRole(string $role) {
+
+        return isset($_SESSION['user']['Role']) && $_SESSION['user']['Role'] == $role;
+
         return isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == $role;
+
     }
 
 
-
+   
 
     
     public function destroy() {
