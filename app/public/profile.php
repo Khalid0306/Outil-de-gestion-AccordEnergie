@@ -22,6 +22,12 @@ echo $page->render('profil.html.twig', [ 'user' => $userData]);
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 6d1a8a0bd7b83efb35465b8a78f2ecac4c50a37d
 =======
 
 
@@ -45,6 +51,10 @@ echo $page->render('suivi_intervention.php', [ 'msg' =>$msg]);
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6d1a8a0bd7b83efb35465b8a78f2ecac4c50a37d
 =======
 
 >>>>>>> 6d1a8a0bd7b83efb35465b8a78f2ecac4c50a37d
