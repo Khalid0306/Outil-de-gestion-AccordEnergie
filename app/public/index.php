@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 $page = new Page();
 $userRepo = new UserRepository($page->pdo);
 $msg = false;
+$title = "Login";
 
 if (isset($_POST['send'])) {
     $user = $userRepo->getUserByEmail([
@@ -27,10 +28,13 @@ if (isset($_POST['send'])) {
                 header('Location: profile.php');
             }
         } else {
-            $msg = "Mot de passe incorrect";
+            $msg = "Mot de passe ou Email incorrect !";
         }
     }
 }
 
-echo $page->render('index.html.twig', ['msg' => $msg]);
-?>
+echo $page->render('index.html.twig', [
+    'msg' => $msg,
+    'title' => $title
+]);
+

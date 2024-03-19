@@ -11,43 +11,57 @@ class UserRepository
         $this->pdo = $pdo;
     }
 
-    //Fonction pour changer le mot de passe
-    public function updatePassword(string $table, string $newPassword, string $email): void
+    // Fonction pour changer le mot de passe
+    public function updatePassword(string $newPassword, string $newPassword_cfh, string $userMail): void
     {
+        $today = date("Y-m-d H:i:s");
+        $email = filter_var($userMail, FILTER_VALIDATE_EMAIL);
+
+        if (empty($newPassword) || empty($userMail) || empty($newPassword_cfh)) {
+            throw new \InvalidArgumentException('Invalid input');
+        }
+
+        if (!is_string($newPassword)) {
+            throw new \InvalidArgumentException('$newPassword doit être une chaîne de caractères');
+        }
+
+        if ($newPassword !== $newPassword_cfh) {
+            throw new \InvalidArgumentException('Veuillez vérifier votre mot de passe.');
+        }
+
+        if ($email == false) {
+            throw new \InvalidArgumentException('Adresse e-mail invalide');
+        }
+
+        $updateQuery = "UPDATE user SET MotDePasse = :password, Updated_at = :today WHERE AdresseMail = :email";
+
+        $stmt = $this->pdo->prepare($updateQuery);
+
+        $stmt->bindValue(':password', password_hash($newPassword, PASSWORD_DEFAULT));
+        $stmt->bindValue(':today', $today);
+        $stmt->bindValue(':email', $email);
+
+        $this->executeUpdate($stmt);
+
+        header('Location: index.php');
+        exit();
+    }
+
+    // Fonction pour exécuter une mise à jour avec gestion de la transaction
+    private function executeUpdate(\PDOStatement $stmt): void
+    {
+        $this->pdo->beginTransaction();
+
         try {
-            
-            if (empty($table) || empty($newPassword) || empty($email)) {
-                throw new \InvalidArgumentException('Invalid ');
-            }
-    
-           
-            if (!is_string($newPassword)) {
-                throw new \InvalidArgumentException('$newPassword doit etre stringue');
-            }
-    
-        
-            $updateQuery = "UPDATE $table SET password = :password WHERE email = :email";
-    
-            $stmt = $this->pdo->prepare($updateQuery);
-    
-            $stmt->bindValue(':password', $newPassword);
-            $stmt->bindValue(':email', $email);
-    
             $stmt->execute();
-    
-            if ($stmt->rowCount() > 0) {
-                echo "Password updated successfully.";
-            } else {
-                echo "No matching rows found for the given email.";
-            }
+            $this->pdo->commit();
         } catch (\PDOException $e) {
-       
-            die("Error updating password: " . $e->getMessage());
-        } catch (\InvalidArgumentException $e) {
-         
-            die("Error: " . $e->getMessage());
+            $this->pdo->rollBack();
+            throw new \RuntimeException('Erreur lors de l\'exécution de la mise à jour: ' . $e->getMessage());
         }
     }
+
+    // Fonction pour gérer les exceptions
 
     //Fonction pour créer un User
     public function insertUser(string $table_name, array $data): void
@@ -65,77 +79,66 @@ class UserRepository
     }
 
 
-// get id commementaire
+    public function getAllstatuts(array $data): array
+    {
+        try {
+            $sql = "SELECT * FROM c WHERE `AdresseMail` = :AdresseMail;";
+            $sth = $this->pdo->prepare($sql);
 
+            if (!$sth) {
+                throw new \RuntimeException("Error preparing the query: " . $this->pdo->errorInfo()[2]);
+            }
 
+            foreach ($data as $key => $value) {
+                $sth->bindValue(":$key", $value);
+            }
 
-public function getAllstatuts(array $data): array
-{
-try {
-    $sql = "SELECT * FROM c WHERE `AdresseMail` = :AdresseMail;";
-    $sth = $this->pdo->prepare($sql);
+            if (!$sth->execute()) {
+                throw new \RuntimeException("Error executing the query: " . $sth->errorInfo()[2]);
+            }
 
-    if (!$sth) {
-        throw new \RuntimeException("Error preparing the query: " . $this->pdo->errorInfo()[2]);
+            return $sth->fetch(\PDO::FETCH_ASSOC) ?: [];
+        } catch (\PDOException $e) {
+            throw new \RuntimeException("Error fetching user by email: " . $e->getMessage());
+        }
     }
-
-    foreach ($data as $key => $value) {
-        $sth->bindValue(":$key", $value);
-    }
-
-    if (!$sth->execute()) {
-        throw new \RuntimeException("Error executing the query: " . $sth->errorInfo()[2]);
-    }
-
-    return $sth->fetch(\PDO::FETCH_ASSOC) ?: [];
-} catch (\PDOException $e) {
-    throw new \RuntimeException("Error fetching user by email: " . $e->getMessage());
-}
-
-}
-
-
-
-
-
-
-
-
-
 
     //Fonction pour récuper l'user par son Email
     public function getUserByEmail(array $data): array
     {
+<<<<<<< HEAD
     try {
         $sql = "SELECT * FROM user WHERE `AdresseMail` = :email;";
         $sth = $this->pdo->prepare($sql);
+=======
+        try {
+            $sql = "SELECT * FROM user WHERE `AdresseMail` = :AdresseMail;";
+            $sth = $this->pdo->prepare($sql);
+>>>>>>> Calendar
 
-        if (!$sth) {
-            throw new \RuntimeException("Error preparing the query: " . $this->pdo->errorInfo()[2]);
+            if (!$sth) {
+                throw new \RuntimeException("Error preparing the query: " . $this->pdo->errorInfo()[2]);
+            }
+
+            foreach ($data as $key => $value) {
+                $sth->bindValue(":$key", $value);
+            }
+
+            if (!$sth->execute()) {
+                throw new \RuntimeException("Error executing the query: " . $sth->errorInfo()[2]);
+            }
+
+            return $sth->fetch(\PDO::FETCH_ASSOC) ?: [];
+        } catch (\PDOException $e) {
+            throw new \RuntimeException("Error fetching user by email: " . $e->getMessage());
         }
-
-        foreach ($data as $key => $value) {
-            $sth->bindValue(":$key", $value);
-        }
-
-        if (!$sth->execute()) {
-            throw new \RuntimeException("Error executing the query: " . $sth->errorInfo()[2]);
-        }
-
-        return $sth->fetch(\PDO::FETCH_ASSOC) ?: [];
-    } catch (\PDOException $e) {
-        throw new \RuntimeException("Error fetching user by email: " . $e->getMessage());
     }
-    
-    }
-    
-    public function getUsersByRole() {
+
+    public function getUsersByRole()
+    {
         $sql = "SELECT * FROM user WHERE Role = 'Client'";
         $sth = $this->pdo->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
-
-
 }
-

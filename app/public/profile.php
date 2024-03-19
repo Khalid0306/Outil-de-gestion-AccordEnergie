@@ -18,3 +18,8 @@ if (!isset($_SESSION['user'])){
  }
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> Calendar

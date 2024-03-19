@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +54,88 @@
                         <a href="register.php" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f94ca4">Sign Up</a>
                     {% else %}
                         <a href="logout.php">Log Out</a>
+=======
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <title>{{ h(title)}}</title>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-transparent">
+        <div class="container-fluid">
+            <!-- Logo -->
+            {% if not userData %}
+            <a class="navbar-brand" href="index.php">
+                <img src="{{'/img/images.png'}}" alt="Logo" width="55" height="40" class="d-inline-block align-text-top">
+                AccordEnergie
+            </a>
+            {% else %}
+            <a class="navbar-brand" href="profil.php">
+                <img src="{{'/img/images.png'}}" alt="Logo" width="55" height="40" class="d-inline-block align-text-top">
+                AccordEnergie
+            </a>
+            {% endif %}
+            <!-- Toggle button -->
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Side Bar -->
+            <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <!-- Side bar Header -->
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">AccordEnergie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <!-- Side Bar Body -->
+                {% if not userData %}
+                    <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+                        <ul class="navbar-nav justify-content-center align-items-center fs-S flex-grow-1 pe-3">
+                            <li class="nav-item mx-2">
+                                <a class="nav-link active" aria-current="page" href="/index.php">Accueil</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" href="#">Service</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" href="#">A propos</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" href="#">Contact</a>
+                            </li>
+                        </ul>
+                        
+
+                        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+                            <a href="index.php" class="">
+                                Login
+                            </a>
+                            <a href="register.php" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f94ca4">
+                                Sign Up
+                            </a>
+                        </div>
+                {% else %}
+                    <ul class="navbar-nav justify-content-center align-items-center fs-S flex-grow-1 pe-3">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" aria-current="page" href="/profile.php">Profil</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link" href="/calendrier.php">Suivi</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                        <a href="logout.php" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f94ca4">
+                            Log Out
+                        </a>
+                    </li>
+                    </ul>
+                    
+>>>>>>> Calendar
                     {% endif %}
+        
                 </div>
             </div>
         </div>

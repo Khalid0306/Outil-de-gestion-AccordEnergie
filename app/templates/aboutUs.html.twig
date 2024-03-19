@@ -1,0 +1,49 @@
+{% block body %} 
+    {% include "navbar.html.twig" %}
+    <body>
+        <header class="bg-dark text-white p-4">
+            <h1 class="text-center">Outils de gestion d'intervention pour la société AccordEnergie</h1>
+        </header>
+        <main class="container mt-5">
+            <section id="Apropos">
+                <h2 class="mb-4">À Propos</h2>
+                <p>
+                    <strong>Outils de gestion d'intervention pour la société AccordEnergie</strong> est un projet de développement web PHP visant à créer un système complet de gestion d'interventions pour une entreprise fictive.
+                </p>
+                <h3 class="mt-4">Développement Web PHP</h3>
+                <p>
+                    <strong>Principe du cours :</strong> Découvrir les étapes pour créer un outil de gestion en PHP. Création des maquettes, réalisation d'un cahier des charges, réalisation d'un diagramme de Gantt. Durée: du 15/01/2024 au 22/03/2024
+                </p>
+                <h3 class="mt-4">Compétences à obtenir</h3>
+                <ul>
+                    <li>Découverte de l'environnement PHP</li>
+                    <li>Connexion et utilisation d'une base de données (MySQL)</li>
+                    <li>Réalisation d'un CRUD au niveau de ces données</li>
+                </ul>
+                <h3 class="mt-4">Notation</h3>
+                <p>Tout au long du projet, les notes seront mises au fur et à mesure de l'avancement et de l'implication de chacun.</p>
+                <ul>
+                    <li>Semaine 4 : Maquettes, schémas de base de données et planning</li>
+                    <li>Semaine 6 : Validation de la partie authentification et accès au service</li>
+                    <li>Semaine 10 : Point d'avancement et validation des pistes de développement</li>
+                    <li>Semaine 12 : Finalisation du projet</li>
+                </ul>
+            </section>
+            <section id="#">
+                <h2 class="mb-4">Nos Services</h2>
+                <h3>Le Projet</h3>
+                <p>
+                    Développement d'un outil de gestion d'intervention pour la société AccordEnergie (Fictive). Le projet comprend plusieurs fonctionnalités destinées à différents types d'utilisateurs :
+                </p>
+                <ul>
+                    <li>Les standardistes</li>
+                    <li>Les intervenants</li>
+                    <li>Les clients</li>
+                    <li>Les admins</li>
+                </ul>
+                <!-- Autres sections à ajouter pour chaque type d'utilisateur -->
+            </section>
+        </main>
+        {% include "footer.html.twig" %}
+    </body>
+{% endblock %}
