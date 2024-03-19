@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 
 $page = new Page();
 $userRepo = new UserRepository($page->pdo);
+$title = "Register";
 
 if (isset($_POST['send'])) {
     $data = [
@@ -28,4 +29,4 @@ if (isset($_POST['send'])) {
     header('Location: index.php');
 }
 
-echo $page->render('register.html.twig', []);
+echo $page->render('register.html.twig', ['title' => $title]);

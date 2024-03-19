@@ -12,13 +12,22 @@ use App\Page;
 $page = new Page();
 $msg = false;
 $Date = new Month();
-$events= new Events($page->pdo);
+$events= new Events($page->pdo, $page);
 $title = "Calendrier";
 
+$userData = $page->Session->get('user');
+$userId = $userData['Id'];
+$userRole = $userData['Role'];
+// dd($userId, $userRole);
 
-// if (!isset($_SESSION['user'])){
-//     header('Location: index.php');
-// }
+if (!isset($_SESSION['user'])){
+    header('Location: index.php');
+}
+
+if (isset($_GET['msg'])) {
+    // Affichez le message
+    $msg = htmlspecialchars($_GET['msg']);
+}
 
 try {
 
@@ -29,15 +38,9 @@ try {
     $start = $month->getStartingDay();
     $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify('Last monday');
     $end = (clone $start)->modify('+' . (6 + 7 * ($weeks -1)) . ' days' );
-    $eventsByday = $events->getEventsByDay($start, $end);
-    $events_result = $events->getEvents($start, $end);
-    $statusInterventions = [];
-    foreach ($events_result as $key => $data) {
-        $statusInterventions[$key] = $events->getStatusEventById($data['Id']);
-    }
-    // var_dump($statusInterventions);
-    // var_dump($events_result);
-
+    $eventsByday = $events->getEventsByDay($start, $end, $userId, $userRole);
+    $events_result = $events->getEvents($start, $end, $userId, $userRole);
+    
     for ($i = 0; $i < $weeks; $i++) { 
         foreach ($month->days as $key => $day) {
             $modifiedDate = (clone $start)->modify("+" . ($key + $i * 7) . "days");
@@ -57,10 +60,8 @@ echo $page->render('calendrier.html.twig', [
     'weeks'=> $weeks,
     'start' => $start,
     'events' => $eventsByday,
-    'events_result' => $events_result,
-    'statutsEvent' => $statusInterventions,
     'testStart' => $testStart,
-    'title' => $title
-
+    'title' => $title,
+    'userData' => $userData
 ]);
 

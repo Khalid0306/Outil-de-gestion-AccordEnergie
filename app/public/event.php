@@ -13,20 +13,42 @@ use App\Page;
 $page = new Page();
 $msg = false;
 $Date = new Month();
-$events= new Events($page->pdo);
+$events= new Events($page->pdo, $page);
 $intervention_data = $events->getEventsById($_GET['Id'] ?? null);
-$eventName = null; 
-
+$standardisteId = [];
 foreach ($intervention_data as $key => $data) {
     $eventName = $data['titre'];
+    $standardisteId = $data['Id_Standardiste'];
     break; 
 }
+$userData = $page->Session->get('user');
+$userId = $userData['Id'];
+// var_dump($userId, $standardisteId);die();
 
-$title = 'Event'.' '.$eventName;
+$eventName = null;
 
-// dd($_GET['Id']);
+    if ($userId !== $standardisteId) {
+        $msg = urlencode("Vous ne pouvez pas intéragir avec cette intervention");
+        header('Location: /calendrier.php?msg=' . $msg);
+        exit;
+    } else {
+        foreach ($intervention_data as $key => $data) {
+            $eventName = $data['titre'];
+            break; 
+        }
+        
+        $title = 'Event'.' '.$eventName;
+        
+        // dd($_GET['Id']);
+        
+        echo $page->render('event.html.twig', [
+            'title' => $title,
+            'userData' => $userData,
+            'eventName' => $eventName,
+            'msg'=> $msg
+        ]);
+    }
 
-echo $page->render('event.html.twig', [
-    'title' => $title,
-    'eventName' => $eventName
-]);
+   
+
+

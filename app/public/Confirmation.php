@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 $page = new Page();
 $userRepo = new UserRepository($page->pdo);
 $msg = false;
+$title = "Change Password";
 
 if (isset($_POST['send'])) {
     
@@ -25,4 +26,7 @@ if (isset($_POST['send'])) {
     }
 }
 
-echo $page->render('pass_forgot.html.twig', ['msg' => $msg]);
+echo $page->render('pass_forgot.html.twig', [
+    'msg' => $msg,
+    'title' => $title
+]);

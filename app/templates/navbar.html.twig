@@ -34,7 +34,7 @@
             <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <!-- Side bar Header -->
                 <div class="offcanvas-header border-bottom">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">AccordEnergie</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <!-- Side Bar Body -->
@@ -42,7 +42,7 @@
                     <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
                         <ul class="navbar-nav justify-content-center align-items-center fs-S flex-grow-1 pe-3">
                             <li class="nav-item mx-2">
-                                <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                                <a class="nav-link active" aria-current="page" href="/index.php">Accueil</a>
                             </li>
                             <li class="nav-item mx-2">
                                 <a class="nav-link" href="#">Service</a>
@@ -67,16 +67,19 @@
                 {% else %}
                     <ul class="navbar-nav justify-content-center align-items-center fs-S flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Acceuil</a>
+                            <a class="nav-link" aria-current="page" href="/profile.php">Profil</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Suivi</a>
+                            <a class="nav-link" href="/calendrier.php">Suivi</a>
                         </li>
-                    </ul>
-                        <a href="logout.php" class="">
+                        <li class="nav-item mx-2">
+                        <a href="logout.php" class="text-white text-decoration-none px-3 py-1 rounded-4" style="background-color: #f94ca4">
                             Log Out
                         </a>
-                        {% endif %}
+                    </li>
+                    </ul>
+                    
+                    {% endif %}
         
                 </div>
             </div>

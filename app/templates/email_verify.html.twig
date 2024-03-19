@@ -15,8 +15,11 @@
 									</div>
 								</div>
 								<h3 class="mb-4 pb-2 pb-md-0 mb-md-5 justify-content-center">Verifier votre mail</h3>
-								 {% if msg %}
-								<div>{{msg}} </div>
+								{% if msg %}
+									<div class="alert alert-danger" role="alert">
+										<div>{{msg}}
+										</div>
+									</div>
 								{% endif %}
 								<form action="" method="post">
 									<div>

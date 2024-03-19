@@ -17,14 +17,6 @@ if (!isset($_SESSION['user'])){
      exit();    
  }
 
-echo $page->render('profil.html.twig', [ 'user' => $userData]);
 
-
-if (isset($_POST['sends'])) {
-    header('Location: suivi_intervention.php');
-    exit();
-}
-
-echo $page->render('suivi_intervention.php', [ 'msg' =>$msg]);
 
 

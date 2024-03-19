@@ -3,7 +3,12 @@
 {% include "navbar.html.twig" %}
 <link href="/css/event.cs" rel="stylesheet" />
 
-<section id="about-section" class="pt-5 pb-5">
+{% if msg %}
+<div class="alert alert-danger" role="alert">
+          <div>{{msg}} </div>
+</div>
+{% endif %}   
+
     <div class="container wrapabout">
         <div class="red"></div>
         <div class="row">
@@ -33,6 +38,15 @@ function goBack() {
 <footer>
 {% include "footer.html.twig" %}
 </footer>
+        <script>
+            const alertElement = document.getElementById('alert');
+
+            // Cacher le message après 5 secondes
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+
+        </script>
 {% endblock %}
   </body>
   </html>
