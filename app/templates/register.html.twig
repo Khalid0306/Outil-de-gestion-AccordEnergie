@@ -1,23 +1,22 @@
 {% extends "base_auth.html.twig" %}
 
-{% block body %} 
-{% include "navbar.html.twig" %}
-<body>
-<section class="gradient-custom">
-    <div class="container py-5 ">
-        <div class="row justify-content-center align-items-center h-100">
-            <div class="col-12 col-lg-9 col-xl-7">
-                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                    <div class="card-body p-4 p-md-5">
-                        <div class="col-12">
-                            <div class="text-center mb-5">
-                                <a href="#!">
-                                    <img src="./img/images.png" alt="Logo" width="175" height="100">
-                                </a>
+{% block body %}
+    {% include "navbar.html.twig" %}
+    <body>
+    <section class="gradient-custom">
+        <div class="container py-5 ">
+            <div class="row justify-content-center align-items-center h-100">
+                <form class="col-12 col-lg-9 col-xl-7" action="/inscription" method="post">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="col-12">
+                                <div class="text-center mb-5">
+                                    <a href="#!">
+                                        <img src="./img/images.png" alt="Logo" width="175" height="100">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 justify-content-center">Créer votre compte</h3>
-                        <form action="" method="post">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 justify-content-center">Créer votre compte</h3>
                             <div class="row">
                                 <div class="col-md-6 mb-4">
 
@@ -56,8 +55,6 @@
                                 </div>
                             </div>
 
-<<<<<<< HEAD
-=======
                             <div class="row">
                                 <div class="mb-4 pb-2">
                                     <div class="form-outline">
@@ -66,39 +63,29 @@
                                     </div>
                                 </div>
                             </div>
-<div class="row">
-   
-</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 6d1a8a0bd7b83efb35465b8a78f2ecac4c50a37d
-=======
->>>>>>> 6d1a8a0bd7b83efb35465b8a78f2ecac4c50a37d
-=======
->>>>>>> 6d1a8a0bd7b83efb35465b8a78f2ecac4c50a37d
-=======
->>>>>>> 6d1a8a0bd7b83efb35465b8a78f2ecac4c50a37d
-                <div class="row">
-                <div class="mb-4 pb-2">
-                    <div class="form-outline">
-                        <label class="form-label" for="password">Password</label>
-                        <input type="password" name="NumeroTel" id="password" class="form-control form-control-lg" />
+                            <div class="row">
+
+                                <div class="row">
+                                    <div class="mb-4 pb-2">
+                                        <div class="form-outline">
+                                            <label class="form-label" for="password">Password</label>
+                                            <input type="password" name="password" id="password" class="form-control form-control-lg" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-2">
+                                <input class="btn btn-primary btn-lg" type="submit" value="S'inscrire" name="send" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="mt-4 pt-2">
-                <input class="btn btn-primary btn-lg" type="submit" value="register" name="send" />
+                </form>
             </div>
         </div>
-    </div>
-</div>
-</form>
-</section>
-<footer>
-{% include "footer.html.twig" %}
-</footer>
-</body>
-</html>
-
+    </section>
+    <footer>
+        {% include "footer.html.twig" %}
+    </footer>
+    </body>
+    </html>
 {% endblock %}
