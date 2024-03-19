@@ -15,6 +15,7 @@ if (isset($_POST['send'])) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         $newPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $newPassword_cfh = password_hash($_POST['password_cfh'], PASSWORD_DEFAULT);
 
@@ -28,6 +29,10 @@ if (isset($_POST['send'])) {
         if ($email === false) {
             throw new \InvalidArgumentException('Adresse e-mail invalide');
         }
+=======
+        $newPassword = $_POST['password'];
+        $newPassword_cfh = $_POST['password_cfh'];
+>>>>>>> Calendar
 =======
         $newPassword = $_POST['password'];
         $newPassword_cfh = $_POST['password_cfh'];

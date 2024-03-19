@@ -19,9 +19,15 @@ if (!isset($_SESSION['user'])){
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
+
+
+>>>>>>> Calendar
+=======
+
 
 
 >>>>>>> Calendar
