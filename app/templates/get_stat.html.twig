@@ -2,50 +2,83 @@
 
 {% block body %}
     {% include "navbar.html.twig" %}
-    <div class="bg-light py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 col-lg-6">
-                    <div class="bg-white p-4 p-md-5 rounded shadow-sm">
-                        <div class="text-center mb-4">
-                            <a href="#!">
-                                <img src="./img/images.png" alt="Logo" width="175" height="100">
-                            </a>
-                        </div>
-                        <h1 class="text-center mb-4">Suivi d'Intervention</h1>
+    <div class="container-fluid mt-3">
+        <div class="row justify-content-start">
+            <div class="col-md-6">
+                <div class="btn-group" role="group" aria-label="Tri">
+                    <a href="?sort=asc" class="btn btn-primary">Tri croissant</a>
+                    <a href="?sort=desc" class="btn btn-primary">Tri décroissant</a>
+                       <a href="/calendrier.php" class="btn btn-outline-primary">
+                        <img src="/img/calendar.png" alt="Calendar" width="24" height="24">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title">Suivi d'Intervention</h3>
+                    </div>
+                    <div class="card-body">
                         {% if msg %}
                             <div class="alert alert-success" role="alert">
                                 {{ msg }}
                             </div>
                         {% endif %}
-                        <div class="row gy-3 gy-md-4">
-                         
-                            {% for intervention in interventions %}
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">ID Intervention: {{ intervention.Id }}</h5>
-                                            <p class="card-text">Statut: {{ intervention.Label }}</p>
-                                            
-                                             <p class="card-text">suivi: {{ intervention.Labele }}</p>
-
-                                            <p class="card-text">commentaire: {{ intervention.commentaire }}</p>
-                                            <h4> Client: </h4>
-                                            <p class="card-text">id: {{ intervention.Id_client }}</p>
-                                            <p class="card-text">nom: {{ intervention.Nom }}</p>
-                                            
-
-
-
-                                           
-                                            <div class="btn-group" role="group" aria-label="Actions">
-                                                <a href="#" class="btn btn-primary">Modifier</a>
-                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                            <th scope="col">titre</th>
+                                        <th scope="col">ID Intervention</th>
+                                        <th scope="col">Statut</th>
+                                        <th scope="col">Suivi</th>
+                                        <th scope="col">Intervenant</th>
+                                        <th scope="col">Commentaire</th>
+                                        <th scope="col">Client ID</th>
+                                        <th scope="col">Nom du Client</th>
+                                        <th scope="col">Date intervention</th>
+                                        <th scope="col">Heure intervention</th>
+                                        <th scope="col">Id_Standardiste</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for intervention in interventions %}
+                                        <tr>
+                                         <td>{{ intervention.titre }}</td>
+                                            <td>{{ intervention.Id }}</td>
+                                            <td>{{ intervention.Label }}</td>
+                                            <td>{{ intervention.Labele }}</td>
+                                            <td>{{ intervention.Id_intervenant }}</td>
+                                            <td>{{ intervention.commentaire }}</td>
+                                            <td>{{ intervention.Id_client }}</td>
+                                            <td>{{ intervention.Nom }}</td>
+                                            <td>{{ intervention.date }}</td>
+                                            <td>{{ intervention.heure }}</td>
+                                            <td>{{ intervention.Id_Standardiste }}</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Actions">
+                                                    {% if intervention.Id_Standardiste == user['Id'] %}
+                                                        <a href="/intervenant_choice.php?intervention_id={{ intervention.Id }}&standardiste_id={{ intervention.Id_Standardiste }}" class="btn btn-sm btn-info">
+                                                            <i class="fas fa-user-plus"></i> Ajouter intervenant
+                                                        </a>
+                                                        <a href="/update_intervenant.php?intervention_id={{ intervention.Id }}&standardiste_id={{ intervention.Id_Standardiste }}" class="btn btn-sm btn-warning">
+                                                            <i class="fas fa-edit"></i> Modifier
+                                                        </a>
+                                                        <a href="/delete_int.php?intervention_id={{ intervention.Id }}" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette intervention ?')">
+                                                            <i class="fas fa-trash-alt"></i> Supprimer
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -53,4 +86,12 @@
         </div>
     </div>
     {% include "footer.html.twig" %}
+    <script>
+        function deleteIntervention(id) {
+            if (confirm("Êtes-vous sûr de vouloir supprimer cette intervention ?")) {
+                // Mettre en œuvre la logique de suppression ici
+                console.log("Suppression de l'intervention avec l'ID:", id);
+            }
+        }
+    </script>
 {% endblock %}

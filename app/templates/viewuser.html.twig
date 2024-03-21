@@ -1,0 +1,74 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %} 
+    {% include "navbar.html.twig" %}
+    <div class="container-fluid" style="background-color: #343a40; color: #fff; padding: 20px;">
+        <h2 style="margin-bottom: 20px;">Liste des Clients</h2>
+        <div class="btn-group" role="group" aria-label="Actions">
+            <select class="form-select" onchange="tri(this.value)" style="background-color: #fff; color: #000;">
+                <option value="" selected disabled>Sélectionner un critère de tri</option>
+                <option value="id_asc"> Id Croissant </option>
+                <option value="id_desc">Id Décroissant </option>
+                <option value="nom_asc"> Nom de A à Z </option>
+                <option value="nom_desc"> Nom de Z à A </option>
+            </select>
+        </div>
+        <table class="table" style="margin-top: 20px; color: #fff;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Numéro de téléphone</th>
+                    <th>Adresse</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in userlist %}
+                    <tr>
+                        <td>{{ user.Id }}</td>
+                        <td>{{ user.Nom }}</td>
+                        <td>{{ user.Prenom }}</td>
+                        <td>{{ user.AdresseMail }}</td>
+                        <td>{{ user.NumeroTel }}</td>
+                        <td>{{ user.Adresse }}</td>
+                        <td>{{ user.Role }}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Actions">
+                                <a href="/modify_role.php?user_id={{ user.Id }}" class="btn btn-primary">      
+                                    <img src="/img/parametre.png" alt="Modify" width='24' height="24">
+                                </a>
+                                <a href="/modifier_user.php?user_id={{ user.Id }}" class="btn btn-primary">
+                                    <img src="/img/modifier-le-texte.png" alt="allmodify" width='24' height="24">
+                                </a>
+                                <a href="/delete_user.php?user_id={{ user.Id }}" class="btn btn-primary"> 
+                                    <img src="/img/supprimer.png" alt="delete" width='24' height="24">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="btn-group" role="group" aria-label="Actions">
+            <a href="dashboard_admin.php" class="btn btn-info">Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        function tri(critere) {
+            if (critere === 'id_asc') {
+                window.location.href = '/viewuser.php?Id=ASC';
+            } else if (critere === 'id_desc') {
+                window.location.href = '/viewuser.php?Id=DESC';
+            } else if (critere === 'nom_asc') {
+                window.location.href = '/viewuser.php?nom=asc';
+            } else if (critere === 'nom_desc') {
+                window.location.href = '/viewuser.php?nom=desc';
+            }
+        }
+    </script>
+{% endblock %}

@@ -5,60 +5,86 @@ use App\Page;
 
 $page = new Page();
 $msg = false;
-
+$title = "Register";
+// Récupérer les données de l'utilisateur depuis la base de données
+$userData = $page->Session->get('user');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if ($page->Session->asRole('Standardiste')) {
-        $user = $page->Session->get('user');
+    if ($page->Session->asRole('Intervenant')||$page->Session->asRole('Admin')) {
+        
+        if (!isset($_GET['intervention_id']) ) {
+            echo "manque id";
+            exit();
+        }
+        
+        $interventionId = $_GET['intervention_id'];
+       
 
-
-
-
-
-//verifer que on modififie uniquement une intervention cle
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // Vérifier si 'id_intervention' est défini dans $_GET
-        if (!isset($_POST['id_intervention'])) {
-            // Rediriger vers une page d'erreur ou gérer l'absence de 'id_intervention'
-            echo "ID d'intervention non spécifié.";
+        // Vérification des clés dans $_POST
+        if (!isset($_POST['statusId']) || !isset($_POST['suiviId'])) {
+            echo "données manquantes.";
             exit();
         }
 
-        $interventionId = $_POST['id_intervention'];
+        $statusId = $_POST['statusId'];
+        $suiviId = $_POST['suiviId'];
 
-        $sql = "UPDATE intervention  set 
-                JOIN statusintervention ON intervention.id_statuts = statusintervention.Id
-                WHERE intervention.id = :interventionid AND intervention.id_standardiste = :userId";
+        $user = $page->Session->get('user');
+      
+            // Mise à jour de l'intervention
+            $sqlUpdateIntervention = "UPDATE intervention 
+                                SET Id_statuts = :statusId
+                                WHERE Id = :id";
+            $stmtUpdateIntervention = $page->pdo->prepare($sqlUpdateIntervention);
 
+            $stmtUpdateIntervention->execute([
+                ":statusId" => $statusId,
+                ":id" => $interventionId
+                
+            ]);
+
+            // Mise à jour du suivi de l'intervention
+            $sqlUpdateSuivi = "UPDATE intervention 
+                          SET Id_Suivi = :suiviId 
+                          WHERE Id = :idIntervention";
+            $stmtUpdateSuivi = $page->pdo->prepare($sqlUpdateSuivi);
+
+            $stmtUpdateSuivi->execute([':suiviId' => $suiviId, ':idIntervention' => $interventionId]);
+
+            if (!empty($_POST['commentaire'])) {
+                // Récupération de l'intervention de l'intervenant
+                $sql = "SELECT intervention.Id 
+                    FROM intervention
+                    JOIN intervention_intervenant i ON intervention.Id = i.Id_intervention
+                    WHERE Id_intervenant = :int";
+                $stmt = $page->pdo->prepare($sql);
+                $stmt->execute([':int' => $user['Id']]);
+                $intervention = $stmt->fetch(PDO::FETCH_ASSOC);
+
+             
+            }
+            
+        $sql = "UPDATE  commentaire SET commentaire_intervenant=:commentaire WHERE Id_intervention=:id_intervention ";
+       
         $stmt = $page->pdo->prepare($sql);
-
+        
         $stmt->execute([
-            ":interventionid" => $interventionId,
-            ":userId" => $user['Id']
+            ":commentaire" => $_POST['commentaire'],
+            ":id_intervention" =>$interventionId 
+           
         ]);
 
-        // Récupérer les résultats de la requête
-        $intervention = $stmt->fetch();
 
-        // Passer les données au template
-        echo $page->render('get_int.html.twig', ['intervention' => $intervention]);
-        exit();
+
+        $msg = "Ajout réussi";
+
+        header('Location: ' . $_SERVER['HTTP_REFERER'] . '?msg=' . $msg); // Pour renvoyer à la page précédente
+        exit;
+     
+   
+    } else {
+        $msg = "Intervenant non connecté";
     }
 }
 
-// Si le code arrive ici, cela signifie que les conditions précédentes n'ont pas été remplies
-echo "Erreur d'autorisation ou de requête.";
-exit();
+echo $page->render('modif_int.html.twig', ['msg' => $msg,'title' => $title,'userData' => $userData]);
 ?>

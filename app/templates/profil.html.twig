@@ -4,6 +4,7 @@
     {% include "navbar.html.twig" %}
 
     <!-- Add your stylesheets and scripts here -->
+    <link rel="stylesheet" href="templates/style.css">
 
     <div class="container">
         <div class="row">
@@ -12,7 +13,7 @@
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <!-- Profile picture section -->
-                            <!-- Add code for profile picture here -->
+                            
                         </div>
 
                         <div class="row">
@@ -83,120 +84,65 @@
             </div>
         </div>
     </div>
-   
 
-    {% if msg %}
-        <p>{{ msg }}</p>
-    {% endif %}
-    <style>
-        /* Ajoutez ces styles dans votre fichier CSS ou dans une balise <style> dans votre fichier HTML */
+            {% if msg %}
+                <div id="alert" class="alert alert-danger" role="alert">
+                    <div>{{ msg }}</div>
+                </div>
+            {% endif %}
     
-            .container {
-                margin-top: 20px;
-            }
-            
-            .card {
-                border: 1px solid #ccc;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
-            
-            .card-title {
-                text-align: center;
-                padding: 20px 0;
-            }
-            
-            .nav-tabs {
-                border-bottom: 2px solid #007bff;
-            }
-            
-            .nav-tabs .nav-item {
-                margin-bottom: -1px;
-            }
-            
-            .nav-tabs .nav-link {
-                border: 1px solid transparent;
-                border-radius: 10px 10px 0 0;
-                color: #007bff;
-            }
-            
-            .nav-tabs .nav-link.active {
-                border-color: #007bff #007bff #fff;
-                border-bottom: 2px solid #fff;
-            }
-            
-            .tab-content {
-                padding: 20px;
-            }
-            
-            label {
-                font-weight: bold;
-            }
-            
-            .row {
-                margin-bottom: 10px;
-            }
-            
-            .btn {
-                margin-top: 10px;
-            }
-            
-            /* Styles spécifiques au bouton de déconnexion */
-            .btn-danger {
-                background-color: #dc3545;
-                color: #fff;
-            }
-            
-            /* Styles spécifiques au bouton de suivi des interventions */
-            .btn-primary {
-                background-color: #007bff;
-                color: #fff;
-            }
-            
-    </style>
-    
-<div>
-</div> 
-<a href="suivi_intervention.php"> suivi
-</a>  <input type="submit" name="sends" value="deconnect">
-<div>  
-        
+    <div>
+    </div> 
+
+    <div>  
     </div>
     <footer>
         {% include "footer.html.twig" %}
     </footer>
+ 
+<style>
+/* Style pour la section de la photo de profil */
+.profile-picture {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture img {
+    width: 150px; /* Taille de la photo de profil */
+    height: 150px;
+    border-radius: 50%; /* Pour créer une forme circulaire */
+    object-fit: cover;
+}
+
+.upload-profile-picture {
+    margin-bottom: 10px;
+}
+
+/* Style pour le bouton de téléchargement de photo */
+.upload-profile-picture input[type="file"] {
+    display: none; /* Masque le champ de fichier d'entrée par défaut */
+}
+
+.upload-profile-picture label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upload-profile-picture label:hover {
+    background-color: #0056b3;
+}
+
+.upload-profile-picture small {
+    display: block;
+    margin-top: 5px;
+    color: #6c757d;
+}
 
 
-{% include "navbar.html.twig" %}
-<body>
-    <h1>Bienvenue sur ma page</h1>
-    
-    {% if msg %}
-        <p>{{ msg }}</p>
-    {% endif %}
-
-    {% if userData %}
-        <p>Email : {{ userData.AdresseMail  }}</p>
-        <!-- Ajoutez d'autres champs selon votre structure de données en session -->
-
-
-
-        <a href="get_stat.php" class="link-secondary text-decoration-none">Standardiste ?</a>
-    {% endif %}
-    
-<input type="submit" name="send" value="disconnect">
-
-    {% endif %}
-    
-<input type="submit" name="sends" value="disconnect">
-
-<footer>
-{% include "footer.html.twig" %}
-</footer>
-</body>
-</html>
-
-
->>>>>>> 2adb1f506a9da5c7e95d346ae258506068bddb45
-
+</style>
+   
 {% endblock %}

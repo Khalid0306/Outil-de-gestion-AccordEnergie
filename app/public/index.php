@@ -8,26 +8,29 @@ $page = new Page();
 $userRepo = new UserRepository($page->pdo);
 $msg = false;
 
-
 if (isset($_POST['send'])) {
-    // var_dump($_POST);
-    
     $user = $userRepo->getUserByEmail([
         'AdresseMail' => $_POST['email'],
     ]);
     
-      
-    if(!$user){
-        $msg="email ou mot de passe incorrect";
+    if (!$user) {
+        $msg = "Email ou mot de passe incorrect";
     } else {
-        if (password_verify($_POST['password'], $user['MotDePasse'])) {       
-            $msg="email bon";
-            $page->Session->add('user',$user);
+        if (password_verify($_POST['password'], $user['MotDePasse'])) {
+            $msg = "Connexion réussie";
+            
+            $page->Session->add('user', $user);
+            // Ajouter une vérification pour rediriger les admins vers le tableau de bord
+            if ($user['Role'] == 'Admin') {
+                header('Location: dashboard_admin.php');
+            } else {
+                header('Location: profile.php');
+            }
+        } else {
+            $msg = "Mot de passe incorrect";
         }
     }
-
-    header('Location: profile.php');
 }
 
-echo $page->render('index.html.twig', [ 'msg' =>$msg]);
-
+echo $page->render('index.html.twig', ['msg' => $msg]);
+?>

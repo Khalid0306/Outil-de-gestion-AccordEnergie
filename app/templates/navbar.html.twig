@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--    Bootstrap CSS   -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!--    Bootstrap JS   -->
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
-    <!--    Style CSS   -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Style CSS -->
     <link rel="stylesheet" href="style.css" />
-    <title>Navbar</title>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg bg-transparent">
+    <title>{{ h(title)}}</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <!--Logo-->
-            <a class="navbar-brand" href="#">
-                {% block stylesheets %}
+            <!-- Logo -->
+            <a class="navbar-brand" href="{% if not userData %}index.php{% else %}profil.php{% endif %}">
                 <img src="{{'/img/images.png'}}" alt="Logo" width="55" height="40" class="d-inline-block align-text-top">
-                {% endblock %}
                 AccordEnergie
             </a>
-            <!--toggle button-->
-            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            {% if not userData %}
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!--     Side Bar    -->
-            <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <!--    Side bar Header-->
-                <div class="offcanvas-header border-bottom">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <!--     Side Bar Body    -->
-                <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
-                    <ul class="navbar-nav justify-content-center align-items-center fs-S flex-grow-1 pe-3">
-                        <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Service</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">A propos</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                    </ul>
-                    <!--  Login/Sign Up-->
-                    <div class="d-flex flex-column flex-lg-row justify-content-center
-                align-items-center gap-3">
-                        <a href="index.php" class="">
-                            Login
-                        </a>
-                        <a href="register.php" class="text-white text-decoration- none px-3 py-1 rounded-4" style="background-color: #f94ca4">
-                            Sign Up
-                        </a>
-                    </div>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/index.php">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutUs.php">A propos</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="index.php" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="register.php" class="nav-link btn btn-outline-primary">Sign Up</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile.php">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calendrier.php">Suivi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="logout.php" class="nav-link btn btn-outline-primary">Log Out</a>
+                    </li>
+                    {% if userData['Role'] == 'Admin' %}
+                    <li class="nav-item">
+                        <a href="dashboard_admin.php" class="nav-link btn btn-outline-primary">Dashboard</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
             </div>
         </div>
     </nav>
-</head>
-</html>
+</body>
 
+</html>

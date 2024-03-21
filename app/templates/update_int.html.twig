@@ -1,0 +1,52 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+    {% include "navbar.html.twig" %}
+    <div class="bg-light py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="bg-white p-4 p-md-5 rounded shadow-sm">
+                        <div class="text-center mb-4">
+                            <a href="#!">
+                                <img src="./img/images.png" alt="Logo" width="175" height="100">
+                            </a>
+                        </div>
+                        <h1 class="text-center mb-4">Modifier Intervention</h1>
+                        {% if msg %}
+                            <div class="alert alert-success" role="alert">
+                                {{ msg }}
+                            </div>
+                        {% endif %}
+                        <form method="post" action="update_int.php">
+                            <div class="row gy-3 gy-md-4">
+                                <div class="col-12">
+                                    <label for="statusId" class="form-label">Statut <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="statusId" id="statusId" required>
+                                        <option value="2">Urgent</option>
+                                        <option value="1">Modéré</option>
+                                        <option value="3">Très urgent</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="suiviId" class="form-label">Suivi <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="suiviId" id="suiviId" required>
+                                        <option value="1">En Attente</option>
+                                        <option value="2">En cours</option>
+                                        <option value="3">Validé</option>
+                                        <option value="4">Annulé</option>
+                                        <option value="5">Rejeté</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "footer.html.twig" %}
+{% endblock %}

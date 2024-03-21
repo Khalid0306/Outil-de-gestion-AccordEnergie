@@ -1,23 +1,44 @@
-{% extends "base_auth.html.twig" %}
+{% block body %}
+	{% include "navbar.html.twig" %}
+	<body>
+		<section class="gradient-custom">
+			<div class="container py-5 ">
+				<div class="row justify-content-center align-items-center h-100">
+					<div class="col-12 col-lg-9 col-xl-7">
+						<div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+							<div class="card-body p-4 p-md-5">
+								<div class="col-12">
+									<div class="text-center mb-5">
+										<a href="#!">
+											<img src="./img/images.png" alt="Logo" width="175" height="100">
+										</a>
+									</div>
+								</div>
+								<h3 class="mb-4 pb-2 pb-md-0 mb-md-5 justify-content-center">Verifier votre mail</h3>
+								{% if msg %}
+									<div class="alert alert-danger" role="alert">
+										<div>{{msg}}
+										</div>
+									</div>
+								{% endif %}
+								<form action="" method="post">
+									<div>
+										<label for="emailRequest">Email :</label>
+										<input type="email" name="email" id="emailRequest" placeholder="entrez votre email" required><br><br>
+									</div>
+									<div class="mt-4 pt-2">
+										<input class="btn btn-primary btn-lg" type="submit" value="Verifier" name="send"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</section>
+				<footer>
+					{% include "footer.html.twig" %}
+				</footer>
+			</body>
+		</html>
 
-{% block body %} 
-{% include "navbar.html.twig" %}
-<h1>Verifier votre mail</h1>
-
-    <form action="" method="post">
-     <div>
-        <label for="emailRequest">Email :</label>
-        <input type="email" name="email" id="emailRequest" placeholder="entrez votre email"required><br><br>
-      </div>
-        
-        <input type="submit" name="sendResquest" value="send">
-    </form>
-    <p>
-
-</p>
-<footer>
-{% include "footer.html.twig" %}
-</footer>
+	{% endblock %}
 </body>
-</html>
- {% endblock %}

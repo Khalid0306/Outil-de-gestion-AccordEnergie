@@ -6,14 +6,34 @@ use App\Page;
 $page = new Page();
 $msg = false;
 
-// Récupérer les données depuis la base de données avec une seule requête JOIN
-$sql = "SELECT intervention.Id, statusintervention.Label,commentaire.commentaire,suiviintervention.Labele ,Nom ,Id_client 
+
+
+
+
+
+
+
+
+
+
+$title = "Register";
+// Récupérer les données de l'utilisateur depuis la base de données
+$userData = $page->Session->get('user');
+// $id=$_GET['Id'];
+// Récupérer le paramètre de requête sort
+$sort = $_GET['sort'] ?? 'asc'; // Par défaut, tri par ordre croissant
+if ($page->Session->asRole('Standardiste') || $page->Session->asRole('Admin')) {
+    $user = $page->Session->get('user');
+// Ajouter la clause ORDER BY à votre requête SQL en fonction du paramètre de tri
+$sql = "SELECT intervention.Id, statusintervention.Label, commentaire.commentaire, suiviintervention.Labele, Nom, Id_client, Id_intervenant, date, heure, Id_Standardiste 
         FROM intervention
         JOIN statusintervention ON intervention.id_statuts = statusintervention.Id
         JOIN suiviintervention ON intervention.id_Suivi = suiviintervention.Id
         JOIN user ON  user.Id = intervention.Id_client
-        
-        JOIN commentaire ON intervention.Id = commentaire.Id_intervention";
+        JOIN intervention_intervenant i ON  intervention.Id = i.Id_intervention
+        JOIN commentaire ON intervention.Id = commentaire.Id_intervention
+        ORDER BY intervention.Id $sort"; // Colonne de tri et ordre (asc ou desc)
+
 $stmt = $page->pdo->prepare($sql);
 $stmt->execute();
 $interventions = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -22,10 +42,18 @@ $interventions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
+
+
 echo $page->render('get_stat.html.twig', [
     'msg' => $msg,
     'interventions' => $interventions,
-  
-
+    'user' => $user, 
+    'userData' => $userData,
+    'title' => $title// Passer la variable $user au modèle Twig
 ]);
+
+
+}else{
+    echo("vous etes pas standardiste");
+}
 ?>

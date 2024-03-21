@@ -6,8 +6,9 @@ use App\Repository\UserRepository;
 $msg = false;
 $page = new Page();
 $userRepo = new UserRepository($page->pdo);
+$title = "Check email";
 
-if (isset($_POST['sendRequest'])) {
+if (isset($_POST['send'])) {
     //On vérifie si l'email est valide 
     $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 
@@ -15,7 +16,7 @@ if (isset($_POST['sendRequest'])) {
         // Gestion d'erreur pour l'adresse email invalide
         $msg = "Veuillez fournir une adresse email valide.";
     } else {
-        $userData = $userRepo->getUserByEmail(['email' => $email]);
+        $userData = $userRepo->getUserByEmail(['AdresseMail' => $email]);
 
         if ($userData) {
             $page->Session->add('user', $userData);
@@ -28,4 +29,7 @@ if (isset($_POST['sendRequest'])) {
     }
 }
 
-echo $page->render('email_verify.html.twig', ['msg' => $msg]);
+echo $page->render('email_verify.html.twig', [
+    'msg' => $msg,
+    'title' => $title
+]);

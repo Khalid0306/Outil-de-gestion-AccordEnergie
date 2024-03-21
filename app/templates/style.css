@@ -1,56 +1,84 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-form {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
+/* Styles pour les boutons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.5;
     text-align: center;
-    color: #333333;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555555;
+/* Style pour le bouton primaire */
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border: 2px solid #007bff;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
+/* Style pour le bouton info */
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border: 2px solid #17a2b8;
 }
 
-input[type="submit"] {
-    background-color: #4caf50;
-    color: #ffffff;
+/* Effet de survol */
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Effet de survol pour le bouton primaire */
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Effet de survol pour le bouton info */
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #138496;
+}
+/* Style pour la section de la photo de profil */
+.profile-picture {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture img {
+    width: 150px; /* Taille de la photo de profil */
+    height: 150px;
+    border-radius: 50%; /* Pour créer une forme circulaire */
+    object-fit: cover;
+}
+
+.upload-profile-picture {
+    margin-bottom: 10px;
+}
+
+/* Style pour le bouton de téléchargement de photo */
+.upload-profile-picture input[type="file"] {
+    display: none; /* Masque le champ de fichier d'entrée par défaut */
+}
+
+.upload-profile-picture label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
+.upload-profile-picture label:hover {
+    background-color: #0056b3;
 }
 
-a {
-    color: #3498db;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+.upload-profile-picture small {
+    display: block;
+    margin-top: 5px;
+    color: #6c757d;
 }

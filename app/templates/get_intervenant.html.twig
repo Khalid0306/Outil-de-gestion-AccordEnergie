@@ -1,0 +1,73 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+    {% include "navbar.html.twig" %}
+    <div class="container-fluid mt-5"> {# Utilisation de container-fluid pour que le conteneur prenne toute la page #}
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title">Suivi d'Intervention</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if msg %}
+                            <div class="alert alert-success" role="alert">
+                                {{ msg }}
+                            </div>
+                        {% endif %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID Intervention</th>
+                                        <th>Statut</th>
+                                        <th>Suivi</th>
+                                        <th>Intervenant</th>
+                                        <th>Commentaire Standardiste</th>
+                                        <th>Commentaire Client</th>
+                                        <th>Commentaire Intervenant</th>
+                                        <th>Client ID</th>
+                                        <th>Nom du Client</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for intervention in interventions %}
+                                        <tr>
+                                            <td>{{ intervention.Id }}</td>
+                                            <td>{{ intervention.Label }}</td>
+                                            <td>{{ intervention.Labele }}</td>
+                                            <td>{{ intervention.Id_intervenant }}</td>
+                                            <td>{{ intervention.Commentaire }}</td>
+                                            <td>{{ intervention.commentaire_client }}</td>
+                                            <td>{{ intervention.commentaire_intervenant }}</td>
+                                            <td>{{ intervention.Id_client }}</td>
+                                            <td>{{ intervention.Nom }}</td>
+                                            <td>{{ intervention.date }}</td>
+                                            <td>{{ intervention.heure }}</td>
+                                            <td>
+                                                <a href="/update_int.php?intervention_id={{ intervention.Id }}" class="btn btn-sm btn-primary">Modifier</a>
+                                               
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "footer.html.twig" %}
+    <script>
+        function deleteIntervention(id) {
+            if (confirm("Êtes-vous sûr de vouloir supprimer cette intervention ?")) {
+                // Mettre en œuvre la logique de suppression ici
+                console.log("Suppression de l'intervention avec l'ID:", id);
+            }
+        }
+    </script>
+{% endblock %}

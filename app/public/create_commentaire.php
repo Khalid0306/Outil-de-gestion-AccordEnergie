@@ -5,41 +5,45 @@ use App\Page;
 
 $page = new Page();
 $msg = false;
+$title = "Register";
 
+// Récupérer les données de l'utilisateur depuis la base de données
+$userData = $page->Session->get('user');
+$user = $page->Session->get('user');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if ($page->Session->asRole('Standardiste')) {
+    if ($page->Session->asRole('Client')) {
         // Récupère l'id de l'utilisateur actuel
-        $user = $page->Session->get('user');
+       
 
-        // Insère dans la table commentaire
-        $sql = "INSERT INTO commentaire (commentaire, id_user, id_intervention) 
-                VALUES (:commentaire, :id_user, :id_intervention)";
+        if (isset($_GET['intervention_id'])) {
+            $interventionId = $_GET['intervention_id'];
+        } else {
+            echo "manque id";
+            exit();
+        }
+
+        $sql = "UPDATE commentaire 
+                SET commentaire_client = :commentaire ,
+                Id_user = :id
+                WHERE Id_intervention = :id_intervention";
         $stmt = $page->pdo->prepare($sql);
 
         $stmt->execute([
             ":commentaire" => $_POST['commentaire'],
-            ":id_intervention" => $_POST['id_intervention'],
-            ":id_user" => $user['Id']
+            ":id_intervention" => $interventionId,
+            ":id" => $user['Id']
         ]);
 
-        // Requête de récupération de l'id du commentaire
-        $selectcom = "SELECT id FROM commentaire WHERE id_intervention = :id_intervention AND id_user = :id_user";
-        $stmtint = $page->pdo->prepare($selectcom);
+    $msg = urldecode("Ajout réussi!");
+    header('Location: /calendrier.php?msg='. $msg);
+    exit;
 
-        $stmtint->execute([
-            ":id_user" => $user['Id'],
-            ":id_intervention" => $_POST['id_intervention']
-        ]);
-
-        // Récupération de l'id du commentaire
-        $res = $stmtint->fetch(\PDO::FETCH_ASSOC);
-
-
-        exit();
+      
     } else {
-        echo ("Standardiste non connecté");
+        echo ("Client non connecté");
     }
 }
 
-echo $page->render('commentaire.html.twig', []);
+echo $page->render('commentaire.html.twig', ['userData' => $userData,'title' => $title
+]);
 ?>

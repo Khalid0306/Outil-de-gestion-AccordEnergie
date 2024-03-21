@@ -1,0 +1,72 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+    {% include "navbar.html.twig" %}
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-12"> {# Changement de la taille de la colonne #}
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title">Suivi d'Intervention</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if msg %}
+                            <div class="alert alert-success" role="alert">
+                                {{ msg }}
+                            </div>
+                        {% endif %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>AdresseMail</th>
+                                        <th>NumeroTel</th>
+                                        <th>Adresse</th>
+                                        <th>Actions</th>
+                                      
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for intervention in interventions %}
+                                        <tr>
+                                            <td>{{ intervention.Id }}</td>
+                                            <td>{{ intervention.Nom}}</td>
+                                            <td>{{ intervention.Prenom }}</td>
+                                            <td>{{ intervention.AdresseMail }}</td>
+                                            <td>{{ intervention.NumeroTel }}</td>
+                                            <td>{{ intervention.Adresse }}</td>
+                                            
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Actions">
+                                                   
+                                                        <a href="/create_int.php?id_client={{ intervention.Id }}" class="btn btn-sm btn-info">
+                                                            <i class="fas fa-user-plus"></i> Ajouter intervention
+                                                        </a>
+                                                       
+                                                 
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "footer.html.twig" %}
+    <script>
+        function deleteIntervention(id) {
+            if (confirm("Êtes-vous sûr de vouloir supprimer cette intervention ?")) {
+                // Mettre en œuvre la logique de suppression ici
+                console.log("Suppression de l'intervention avec l'ID:", id);
+            }
+        }
+    </script>
+{% endblock %}

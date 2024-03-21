@@ -7,9 +7,11 @@ $page = new Page();
 $msg = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    if ($page->Session->asRole('Standardiste')) {
+    if ($page->Session->asRole('Standardiste')||$page->Session->asRole('Admin')) {
         $user = $page->Session->get('user');
-
+        $title = "Register";
+        // Récupérer les données de l'utilisateur depuis la base de données
+$userData = $page->Session->get('user');
         // Vérifier si 'id_intervention' est défini dans $_GET
         if (!isset($_GET['id_intervention'])) {
             // Rediriger vers une page d'erreur ou gérer l'absence de 'id_intervention'
@@ -34,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $intervention = $stmt->fetch();
 
         // Passer les données au template
-        echo $page->render('get_stat.html.twig', ['intervention' => $intervention]);
+        echo $page->render('get_stat.html.twig', ['intervention' => $intervention,'title' => $title,'userData' => $userData]);
         exit();
     }
 }
